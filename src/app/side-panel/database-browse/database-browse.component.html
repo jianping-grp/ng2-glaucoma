@@ -1,0 +1,11 @@
+<form #databaseBrowseForm="ngForm" (ngSubmit)="submit()">
+  <md-select placeholder="browse type" [(ngModel)]="selectedType" name="databaseBrowseType">
+    <md-option *ngFor="let dataTypeEl of dataTypeList" [value]="dataTypeEl.value">
+      {{dataTypeEl.viewValue}}
+    </md-option>
+  </md-select>
+  <md-form-field>
+    <input mdInput [placeholder]="getDataTypePlaceholder()" [(ngModel)]="dataType" disabled name="dataType">
+  </md-form-field>
+  <button md-raised-button type="submit" color="primary" [disabled]="databaseBrowseForm.invalid">Submit</button>
+</form>

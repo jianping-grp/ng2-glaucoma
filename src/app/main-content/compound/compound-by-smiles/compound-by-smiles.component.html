@@ -1,0 +1,46 @@
+<md-table #compoundByStructureTable [dataSource]="compoundDataSource">
+  <ng-container mdColumnDef="generic_name">
+    <md-header-cell *mdHeaderCellDef>GenricName</md-header-cell>
+    <md-cell *mdCellDef="let row">{{row.generic_name}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="cas">
+    <md-header-cell *mdHeaderCellDef>Cas</md-header-cell>
+    <md-cell *mdCellDef="let row">{{row.cas}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="smiles">
+    <md-header-cell *mdHeaderCellDef>Smiles</md-header-cell>
+    <md-cell *mdCellDef="let row">
+      <app-jsme [elementId]="row.id"
+                [width]="100"
+                [height]="100"
+                [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+                [molString]="row.smiles"
+      >
+      </app-jsme>
+    </md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="mol_weight">
+    <md-header-cell *mdHeaderCellDef>MolWeight</md-header-cell>
+    <md-cell *mdCellDef="let row">{{row.mol_weight}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="drugbank_id">
+    <md-header-cell *mdHeaderCellDef>DrugBankId</md-header-cell>
+    <md-cell *mdCellDef="let row">{{row.drugbank_id}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="links">
+    <md-header-cell *mdHeaderCellDef>Uniport-Detail</md-header-cell>
+    <md-cell *mdCellDef="let row"> view
+      <!--<button md-button color="primary" (click)="goUniprotDetail(row.id)">view</button>-->
+    </md-cell>
+  </ng-container>
+
+  <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+  <md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
+</md-table>
+
+
