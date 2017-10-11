@@ -36,7 +36,7 @@ export class CompoundBySmilesComponent implements OnInit {
       .subscribe((params: ParamMap) => {
         //fetch data base queryParams
         if (params.has('structureSearch')) {
-          if (params.get('structureSearch') === 'structure') {
+          if (params.get('structureSearch') === '1') {
             this.route.params
               .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles']))
               .subscribe(data => {
@@ -48,7 +48,7 @@ export class CompoundBySmilesComponent implements OnInit {
                 },
                 () => {
                 })
-          }else if(params.get('structureSearch') === 'subStructure') {
+          }else if(params.get('structureSearch') === '0') {
             this.route.params
               .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles']))
               .subscribe(data => {

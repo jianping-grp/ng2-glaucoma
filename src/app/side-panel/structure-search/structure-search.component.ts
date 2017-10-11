@@ -11,7 +11,7 @@ import {HttpClient} from "@angular/common/http";
 })
 
 export class StructureSearchComponent implements OnInit {
-  structureSearch = '';
+  structureSearch = '0'; // '0' denotes structure while '1' denotes substructure search
   structureSearchTypeList = [
     {value: 'structure', viewValue: 'Structure', placeHolder: 'search structure'},
     {value: 'substructure', viewValue: 'Substructure', placeHolder: 'search substructure'}
