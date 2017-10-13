@@ -4,17 +4,17 @@
           [showDemo]="true"
 >loading JSME widget
 </app-jsme>
-
+<br/>
 <form #structureSearchForm (ngSubmit)="submit(applet.smiles)">
-  <md-select placeholder="search type" [(ngModel)]="selectedType" name="structureSearchType">
+  <md-select placeholder="search type" [(ngModel)]="selectedStructureType" name="structureSearchType">
     <md-option *ngFor="let searchTypeEl of structureSearchTypeList" [value]="searchTypeEl.value">
       {{searchTypeEl.viewValue}}
     </md-option>
   </md-select>
   <md-form-field>
-    <input mdInput [placeholder]="getSearchTypePlaceholder()" [(ngModel)]="structureSearch" disabled name="structureSearch">
+    <input mdInput [placeholder]="getSearchTypePlaceholder()"  disabled>
   </md-form-field>
-  <button md-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
+  <button md-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
 
 </form>
 

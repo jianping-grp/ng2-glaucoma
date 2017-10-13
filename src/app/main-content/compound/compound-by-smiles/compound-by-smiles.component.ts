@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {RestService} from "../../../service/rest/rest.service";
-import {ActivatedRoute, ParamMap, Params} from "@angular/router";
+import {ActivatedRoute, ParamMap, Params, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 import {Compound} from "../../../models/compound";
 import {CompoundsListDataSource} from "../compounds-list.data.source";
@@ -15,10 +15,11 @@ export class CompoundBySmilesComponent implements OnInit {
   compound: Compound[];
   compoundDataSource: CompoundsListDataSource;
   displayedColumns: string[];
-  pageMata: PageMeta | null;
+  pageMeta: PageMeta | null;
 
   constructor(private rest: RestService,
               private route: ActivatedRoute,
+              private router: Router
               ){
     this.displayedColumns = [
       'generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'links'
@@ -26,35 +27,40 @@ export class CompoundBySmilesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('compound by smiles init')
+    console.log('compound by smiles init');
     this._postCompound();
 
   }
 
-  private _postCompound(): void {
+  goUniprotDetail(id: any) {
+    this.router.navigate(['/uniprot-detail', id])
+  }
+
+  private _postCompound(page?, perPage?): void {
     this.route.queryParamMap
       .subscribe((params: ParamMap) => {
         //fetch data base queryParams
-        if (params.has('structureSearch')) {
-          if (params.get('structureSearch') === '1') {
+        // selectedStructureType is 'structure' denotes structure search while 'substructure' denotes substructure search
+        if (params.has('selectedStructureType')) {
+          if (params.get('selectedStructureType') === 'structure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles']))
+              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], page, perPage))
               .subscribe(data => {
                   this.compound = data['compounds'];
                   this.compoundDataSource = new CompoundsListDataSource(this.compound);
-                  this.pageMata = data['meta']
+                  this.pageMeta = data['meta']
                 },
                 error => {
                 },
                 () => {
                 })
-          }else if(params.get('structureSearch') === '0') {
+          }else if(params.get('selectedStructureType') === 'substructure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles']))
+              .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles'], page, perPage))
               .subscribe(data => {
                   this.compound = data['compounds'];
                   this.compoundDataSource = new CompoundsListDataSource(this.compound);
-                  this.pageMata = data['meta'];
+                  this.pageMeta = data['meta'];
                 },
                 error => {
                 },
@@ -63,5 +69,9 @@ export class CompoundBySmilesComponent implements OnInit {
           }
         }
       })
+  }
+
+  pageChange(event) {
+    this._postCompound(event.pageIndex, event.pageSize)
   }
 }

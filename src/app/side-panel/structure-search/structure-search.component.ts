@@ -1,8 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
-import construct = Reflect.construct;
 import {RestService} from "../../service/rest/rest.service";
-import {HttpClient} from "@angular/common/http";
+
 
 @Component({
   selector: 'app-structure-search',
@@ -11,39 +10,26 @@ import {HttpClient} from "@angular/common/http";
 })
 
 export class StructureSearchComponent implements OnInit {
-  structureSearch = '0'; // '0' denotes structure while '1' denotes substructure search
   structureSearchTypeList = [
     {value: 'structure', viewValue: 'Structure', placeHolder: 'search structure'},
     {value: 'substructure', viewValue: 'Substructure', placeHolder: 'search substructure'}
   ];
-  selectedType = this.structureSearchTypeList[0].value;
+  selectedStructureType = this.structureSearchTypeList[0].value;
 
   constructor(private router: Router,
               private rest: RestService,
-              private http: HttpClient) { }
+              ) { }
 
-  ngOnInit() {
-    this._postCompoundTest()
-  }
-
-  //todo delete
-  private _postCompoundTest():void {
-    this.rest.postCompoundByStructure('c1ccccc1')
-      .subscribe(data => console.log(data))
-  }
+  ngOnInit() { }
 
   getSearchTypePlaceholder(): string{
-    return this.structureSearchTypeList.find(el => el.value === this.selectedType).placeHolder
+    return this.structureSearchTypeList.find(el => el.value === this.selectedStructureType).placeHolder
   }
-
-  // goCompound(smiles: string) {
-  //
-  // }
-
 
   submit(smiles: string) {
     console.log(smiles);
-    this.router.navigate(['/compound-by-smiles',smiles], {queryParams: {structureSearch: this.structureSearch}})
+    // selectedStructureType is 'structure' denotes structure search while 'substructure' denotes substructure search
+    this.router.navigate(['/compound-by-smiles',smiles], {queryParams: {selectedStructureType: this.selectedStructureType}})
   }
 
 }

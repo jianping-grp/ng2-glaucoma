@@ -35,19 +35,21 @@ export class RestService {
       .finally(() => this.globalService.setLoading(false));
   }
 
-  postCompoundByStructure(smiles: string): Observable<any>{
-    const data= {smiles: smiles, similarity: 0.5, substructure_search: 0};
+  postCompoundByStructure(smiles: string, page=0, perPage=this.PER_PAGE): Observable<any>{
+    page= +(page) +1;
+    const data= {smiles: smiles, similarity: 1, substructure_search: 0};
     this.globalService.setLoading(true);
     console.log({data});
-    return this.http.post(`${this.REST_HOST}/compounds/search/`, data)
+    return this.http.post(`${this.REST_HOST}/compounds/search/?page=${page}&per_page=${perPage}`, data)
       .finally(() => this.globalService.setLoading(false))
       // .catch(this.handleError)
   }
 
-  postCompoundBySubstructure(smiles:string): Observable<any> {
-    const body={smiles: smiles, substructure_search: 1};
+  postCompoundBySubstructure(smiles:string, page=0, perPage=this.PER_PAGE): Observable<any> {
+    page = +(page) + 1;
+    const body={smiles: smiles, similarity: 0, substructure_search: 1};
     this.globalService.setLoading(true);
-    return this.http.post(`${this.REST_HOST}/compounds/search/`, body)
+    return this.http.post(`${this.REST_HOST}/compounds/search/?page=${page}&per_page=${perPage}`, body)
       .finally(() => this.globalService.setLoading(false))
       .catch(this.handleError);
   }
