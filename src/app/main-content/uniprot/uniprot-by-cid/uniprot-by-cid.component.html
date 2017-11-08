@@ -1,0 +1,65 @@
+<!--Uniprot Basic Infomation-->
+<table class="mdl-data-table mdl-shadow--2dp">
+  <tr>
+    <th>GenericName: </th>
+    <td>{{compound?.generic_name}}</td>
+  </tr>
+  <tr>
+    <th>Smiles: </th>
+    <td>
+      <app-jsme [elementId]="compound?.id"
+                [width]="100"
+                [height]="100"
+                [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
+                [molString]="compound?.smiles"
+      >
+      </app-jsme>
+    </td>
+  </tr>
+  <tr>
+    <th>MolWeight: </th>
+    <td>{{compound?.mol_weight}}</td>
+  </tr>
+</table>
+<br>
+<!--Uniprot Table-->
+<md-table #uniprotByCidTable [dataSource]="uniprotByCidDataSource">
+  <ng-container mdColumnDef="entry">
+    <md-header-cell *mdHeaderCellDef>Entry</md-header-cell>
+    <md-cell *mdCellDef="let row">{{row.entry}}</md-cell>
+  </ng-container>
+
+<ng-container mdColumnDef="entryname">
+  <md-header-cell *mdHeaderCellDef>Entryname</md-header-cell>
+  <md-cell *mdCellDef="let row">{{row.entryname}}</md-cell>
+</ng-container>
+
+<ng-container mdColumnDef="compounds">
+  <md-header-cell *mdHeaderCellDef>Compound-detail</md-header-cell>
+  <md-cell *mdCellDef="let row">
+    <button md-button color="primary" (click)="goCompoundDetail(row.compounds)">view</button>
+  </md-cell>
+</ng-container>
+
+<md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+<md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
+</md-table>
+<mat-paginator [length]="pageMeta?.total_results"
+               [pageSize]="pageMeta?.per_page"
+               (page)="pageChange($event)"
+>
+</mat-paginator>
+
+<!--<table class="table table-striped table-hover table-responsive">-->
+  <!--<tr>-->
+    <!--<th>#</th>-->
+    <!--<th>entry</th>-->
+    <!--<th>entryName</th>-->
+  <!--</tr>-->
+
+  <!--<tr *ngFor="let uniprot of uniprotDetail; let i= index">-->
+    <!--<td>{{i+1}}</td>-->
+    <!--<td>{{uniprot.entry}}</td>-->
+    <!--<td>{{uniprot.entryname}}</td>-->
+  <!--</tr>-->
+<!--</table>-->

@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {RestService} from "../../../service/rest/rest.service";
 import {Products} from "../../../models/products";
 import {PageMeta} from "../../../models/page-meta";
@@ -18,15 +18,20 @@ export class ProductByNameComponent implements OnInit {
   includeParam = '?include[]=compound.*'
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private rest: RestService) {
     this.displayedColumns = [
-      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id',
+      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'uniprot'
     ]
   }
 
   ngOnInit() {
     console.log('compound by name');
     this._getCompoundByName();
+  }
+
+  goUniprotDetail(id: any) {
+    this.router.navigate(['/uniprot-by-cid', id])
   }
 
   private _getCompoundByName(page?, perPage?): void {

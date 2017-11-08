@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class KeywordSearchComponent implements OnInit {
   keyword: string;
   searchTypeList = [
-    {value: 'product', viewValue: 'Product', placeholder: 'product name'}
+    {value: 'product', viewValue: 'Drug', placeholder: 'Drug Name'}
   ];
   selectedType = this.searchTypeList[0].value;
   constructor(private router: Router) {

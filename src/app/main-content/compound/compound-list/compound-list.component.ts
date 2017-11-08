@@ -31,8 +31,8 @@ export class CompoundListComponent implements OnInit {
     this._getCompoundList()
   }
 
-  goUniprotDetail(id: any) {
-    this.router.navigate(['/uniprot-detail', id])
+  goUniprotByCid(id: any) {
+    this.router.navigate(['/uniprot-by-cid',id])
   }
 
   private _getCompoundList(page?, perPage?): void {

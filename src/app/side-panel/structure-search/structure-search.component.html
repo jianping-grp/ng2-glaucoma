@@ -11,9 +11,17 @@
       {{searchTypeEl.viewValue}}
     </md-option>
   </md-select>
-  <md-form-field>
-    <input mdInput [placeholder]="getSearchTypePlaceholder()"  disabled>
-  </md-form-field>
+
+  <!--<md-form-field>-->
+    <!--<input mdInput [placeholder]="getSearchTypePlaceholder()" disabled>-->
+  <!--</md-form-field>-->
+
+  <md-select placeholder="similarity value" [(ngModel)]="selectedSimilarityValue" name="similarityValue" [disabled]="selectedStructureType==='substructure'">
+    <md-option *ngFor="let similarity of similarityValueList" [value]="similarity">
+      {{similarity}}
+    </md-option>
+    </md-select>
+
   <button md-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
 
 </form>

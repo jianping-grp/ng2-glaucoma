@@ -1,6 +1,6 @@
 <md-table #compoundByNameTable [dataSource]="productDataSource">
   <ng-container mdColumnDef="name">
-    <md-header-cell *mdHeaderCellDef>ProductName</md-header-cell>
+    <md-header-cell *mdHeaderCellDef>DrugName</md-header-cell>
     <md-cell *mdCellDef="let row">{{row.name}}</md-cell>
   </ng-container>
 
@@ -35,6 +35,13 @@
   <ng-container mdColumnDef="drugbank_id">
     <md-header-cell *mdHeaderCellDef>DrugBankId</md-header-cell>
     <md-cell *mdCellDef="let row">{{row.compound.drugbank_id}}</md-cell>
+  </ng-container>
+
+  <ng-container mdColumnDef="uniprot">
+    <md-header-cell *mdHeaderCellDef>Target</md-header-cell>
+    <md-cell *mdCellDef="let row">
+      <button md-button color="primary" (click)="goUniprotDetail(row.compound.id)">view</button>
+    </md-cell>
   </ng-container>
 
   <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>

@@ -1,4 +1,19 @@
-<md-table #compoundDetailByUidTable [dataSource]="compoundDetailByUidDataSource">
+<!--Target Basic Information-->
+<table class="mdl-data-table mdl-shadow--2dp">
+<tr>
+  <th>Entry: </th>
+  <td>{{uniprot?.entry}}</td>
+</tr>
+<tr>
+  <th>EntryName: </th>
+  <td>{{uniprot?.entryname}}</td>
+</tr>
+</table>
+
+<br/>
+
+<!--Compound Table-->
+<md-table #compoundByUidTable [dataSource]="compoundByUidDataSource">
   <ng-container mdColumnDef="generic_name">
     <md-header-cell *mdHeaderCellDef>GenricName</md-header-cell>
     <md-cell *mdCellDef="let row">{{row.generic_name}}</md-cell>
@@ -36,4 +51,8 @@
   <md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
 </md-table>
 
-
+<mat-paginator [length]="pageMeta?.total_results"
+               [pageSize]="pageMeta?.per_page"
+               (page)="pageChange($event)"
+>
+</mat-paginator>

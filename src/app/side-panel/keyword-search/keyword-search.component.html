@@ -1,5 +1,5 @@
 <form #keywordSearchForm="ngForm" (ngSubmit)="submit()">
-  <md-select placeholder="search type" [(ngModel)]="selectedType" name="keywordSearchType">
+  <md-select placeholder="search type" [(ngModel)]="selectedType" name="keywordSearchType" >
     <md-option *ngFor="let searchTypeEl of searchTypeList" [value]="searchTypeEl.value">
       {{searchTypeEl.viewValue}}
     </md-option>

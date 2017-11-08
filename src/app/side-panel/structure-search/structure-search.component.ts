@@ -10,11 +10,14 @@ import {RestService} from "../../service/rest/rest.service";
 })
 
 export class StructureSearchComponent implements OnInit {
+  similarityValueList = [100, '>=99%', '>=97%', '>=95%', '>=90%', '>=85%', '>=80%', '>=70%', '>=60%', '>=50%'];
+
   structureSearchTypeList = [
-    {value: 'structure', viewValue: 'Structure', placeHolder: 'search structure'},
-    {value: 'substructure', viewValue: 'Substructure', placeHolder: 'search substructure'}
+    {value: 'structure', viewValue: 'Similarity', placeHolder: 'Similarity number of 0.5-1'},
+    {value: 'substructure', viewValue: 'Substructure', placeHolder: '1'}
   ];
   selectedStructureType = this.structureSearchTypeList[0].value;
+  selectedSimilarityValue = this.similarityValueList[0];
 
   constructor(private router: Router,
               private rest: RestService,
@@ -26,10 +29,18 @@ export class StructureSearchComponent implements OnInit {
     return this.structureSearchTypeList.find(el => el.value === this.selectedStructureType).placeHolder
   }
 
-  submit(smiles: string) {
+  submit(smiles: string,) {
     console.log(smiles);
+    let similarityValue;
+    // transform selectedSimilarityValue to float;
+    if(typeof this.selectedSimilarityValue === 'number' ) {
+      similarityValue= 1;
+    } else {
+      similarityValue = parseInt(this.selectedSimilarityValue.slice(2)) /100;
+    };
+    console.log(typeof similarityValue);
     // selectedStructureType is 'structure' denotes structure search while 'substructure' denotes substructure search
-    this.router.navigate(['/compound-by-smiles',smiles], {queryParams: {selectedStructureType: this.selectedStructureType}})
+    this.router.navigate(['/compound-by-smiles',smiles], {queryParams: {selectedStructureType: this.selectedStructureType, similarityValue: similarityValue}})
   }
 
 }

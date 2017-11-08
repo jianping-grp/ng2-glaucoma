@@ -1,5 +1,5 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {UniprotDetailComponent} from "./uniprot-detail.component"
+import {UniprotDetailComponent} from "./uniprot-by-cid.component"
 
 describe('UniprotDetailComponent', () => {
   let component: UniprotDetailComponent;

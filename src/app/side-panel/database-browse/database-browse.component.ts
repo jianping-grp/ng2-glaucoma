@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
 export class DatabaseBrowseComponent implements OnInit {
   dataType= '';
   dataTypeList = [
-    {value: 'compounds', viewValue: 'Compounds', placeholder: 'compounds list'},
-    {value: 'uniprots', viewValue: 'Uniprots', placeholder: 'uniprots list'},
-    {value: 'products', viewValue: 'Products', placeholder: 'products list'}
+    {value: 'compounds', viewValue: 'Compounds', placeholder: 'compounds targeting glaucoma related proteins'},
+    {value: 'uniprots', viewValue: 'Targets', placeholder: 'proteins related to glaucoma'},
+    {value: 'products', viewValue: 'Drugs', placeholder: 'drugs for glaucoma treatment'}
   ];
   selectedType = this.dataTypeList[0].value;
 

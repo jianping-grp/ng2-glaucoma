@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
               private rest: RestService,
               ) {
     this.displayedColumns = [
-      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id',
+      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'uniprot'
     ]
   }
 
@@ -31,8 +31,8 @@ export class ProductListComponent implements OnInit {
     this._getProductList();
   }
 
-  goCompoundDetail(id: any) {
-    this.router.navigate(['/compound-detail', id])
+  goUniprotDetail(id: any) {
+    this.router.navigate(['/uniprot-by-cid', id])
   }
 
   private _getProductList(page?, perPage?): void {

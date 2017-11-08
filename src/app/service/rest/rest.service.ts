@@ -24,7 +24,7 @@ export class RestService {
   private fetchDataList(url: string, includeParam='', page=0, perPage=this.PER_PAGE){
     page = +(page) + 1;
     this.globalService.setLoading(true);
-    return this.http.get(`${this.REST_HOST}/${url}/${includeParam}?page=${page}&per_page=${perPage}`)
+    return this.http.get(`${this.REST_HOST}/${url}${includeParam}?page=${page}&per_page=${perPage}`)
       .finally(() => this.globalService.setLoading(false)); //stop loading when finished or an error occur
   }
 
@@ -35,11 +35,11 @@ export class RestService {
       .finally(() => this.globalService.setLoading(false));
   }
 
-  postCompoundByStructure(smiles: string, page=0, perPage=this.PER_PAGE): Observable<any>{
+  postCompoundByStructure(smiles: string, similarity: number, page=0, perPage=this.PER_PAGE): Observable<any>{
     page= +(page) +1;
-    const data= {smiles: smiles, similarity: 1, substructure_search: 0};
+    const data= {smiles: "c1ccccc1", similarity: similarity, substructure_search: 0};
     this.globalService.setLoading(true);
-    console.log({data});
+    console.log(data);
     return this.http.post(`${this.REST_HOST}/compounds/search/?page=${page}&per_page=${perPage}`, data)
       .finally(() => this.globalService.setLoading(false))
       // .catch(this.handleError)
@@ -55,23 +55,41 @@ export class RestService {
   }
 
   getCompoundList(includeParam,page?, perPage?): Observable<any> {
-    return this.fetchDataList(`compounds`,includeParam, page, perPage)
+    return this.fetchDataList(`compounds/`,includeParam, page, perPage)
       .catch(this.handleError);
-
   }
 
   getUniprotList(includeParam ,page?, perPage?): Observable<any> {
-    return this.fetchDataList(`uniprot-info`,includeParam, page, perPage)
+    return this.fetchDataList(`uniprot-info/`,includeParam, page, perPage)
       .catch(this.handleError)
   }
 
   getProductList(includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`products`, includeParam, page, perPage)
+    return this.fetchDataList(`products/`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
-  getUniportByCid(id: any, includeParams): Observable<any> {
-    return this.fetchData(`compounds/${id}`, includeParams)
+  //get uniprot  by compounds id
+  getUniprotByCid(id: any, includeParam, page?, perPage?): Observable<any> {
+    return this.fetchDataList(`uniprot-info/?filter{compounds.id}=${id}&`, includeParam, page, perPage)
+      .catch(this.handleError)
+  }
+
+  //get compounds by uniprot id
+  getCompoundsByUid(id: any, includeParam, page?, perPage?): Observable<any> {
+    return this.fetchDataList(`compounds/?filter{uniprotinfo_set.id}=${id}&`, includeParam, page, perPage)
+      .catch(this.handleError)
+  }
+
+  //get Compound detail by compound id
+  getCompoundDetail(id: any, includeParam): Observable<any> {
+    return this.fetchData(`compounds/${id}`, includeParam)
+      .catch(this.handleError)
+  }
+
+  //get Uniprot detail by uniprot id
+  getUniprotDetail(id: any, includeParam): Observable<any> {
+    return this.fetchData(`uniprot-info/${id}`, includeParam)
       .catch(this.handleError)
   }
 
@@ -80,15 +98,17 @@ export class RestService {
       .catch(this.handleError)
   }
 
+  // getUniportByCid(id: any, includeParams): Observable<any> {
+  //   return this.fetchData(`compounds/${id}`, includeParams)
+  //     .catch(this.handleError)
+  // }
+
 
 //get compounds by product name
   getCompoundsByName(includeParam, name, page?, perPage?): Observable<any> {
     return this.searchDataList('products',includeParam, name, page, perPage)
       .catch(this.handleError)
   }
-
-  postStructure
-
 
 
 

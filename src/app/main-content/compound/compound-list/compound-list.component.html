@@ -33,9 +33,9 @@
   </ng-container>
 
   <ng-container mdColumnDef="links">
-    <md-header-cell *mdHeaderCellDef>Uniport-Detail</md-header-cell>
+    <md-header-cell *mdHeaderCellDef>Target</md-header-cell>
     <md-cell *mdCellDef="let row">
-      <button md-button color="primary" (click)="goUniprotDetail(row.id)">view</button>
+      <button md-button color="primary" (click)="goUniprotByCid(row.id)">view</button>
     </md-cell>
   </ng-container>
 

@@ -16,6 +16,7 @@ export class CompoundBySmilesComponent implements OnInit {
   compoundDataSource: CompoundsListDataSource;
   displayedColumns: string[];
   pageMeta: PageMeta | null;
+  // similarity='';
 
   constructor(private rest: RestService,
               private route: ActivatedRoute,
@@ -33,7 +34,7 @@ export class CompoundBySmilesComponent implements OnInit {
   }
 
   goUniprotDetail(id: any) {
-    this.router.navigate(['/uniprot-detail', id])
+    this.router.navigate(['/uniprot-by-cid', id])
   }
 
   private _postCompound(page?, perPage?): void {
@@ -42,13 +43,17 @@ export class CompoundBySmilesComponent implements OnInit {
         //fetch data base queryParams
         // selectedStructureType is 'structure' denotes structure search while 'substructure' denotes substructure search
         if (params.has('selectedStructureType')) {
+          //fetch similarityValue and transform number;
+          let similarity = +params.get('similarityValue');
+            console.log(params.has('similarityValue'));
           if (params.get('selectedStructureType') === 'structure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], page, perPage))
+              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], similarity,  page, perPage))
               .subscribe(data => {
                   this.compound = data['compounds'];
                   this.compoundDataSource = new CompoundsListDataSource(this.compound);
-                  this.pageMeta = data['meta']
+                  this.pageMeta = data['meta'];
+
                 },
                 error => {
                 },
@@ -70,6 +75,7 @@ export class CompoundBySmilesComponent implements OnInit {
         }
       })
   }
+
 
   pageChange(event) {
     this._postCompound(event.pageIndex, event.pageSize)

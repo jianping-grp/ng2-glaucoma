@@ -16,7 +16,7 @@ export class UniprotListComponent implements OnInit {
   uniprotListDataSource: UniprotListDataSource;
   pageMeta: PageMeta | null;
   displayedColumns: string[];
-  includeParam='?exclude[]=compounds.*&include[]=compounds.id&';
+  includeParam='';
 
   constructor(private rest: RestService,
               private router: Router,
@@ -29,14 +29,18 @@ export class UniprotListComponent implements OnInit {
     this._getUniprotList();
   }
 
-  goCompoundDetail(compounds: Compound[]) {
-    let idList = [];
-    //compounds only include compound id list
-    for (let compound of compounds){
-      idList.push(compound.id)
-    }
-    this.router.navigate(['/compound-detail-uid', {IdList: idList}])
+  goCompoundByUid(id: string) {
+    this.router.navigate(['/compound-by-uid',id])
   }
+
+  // goCompoundDetail(compounds: Compound[]) {
+  //   let idList = [];
+  //   //compounds only include compound id list
+  //   for (let compound of compounds){
+  //     idList.push(compound.id)
+  //   }
+  //   this.router.navigate(['/compound-detail-uid', {IdList: idList}])
+  // }
 
   private _getUniprotList(page?, perPage?): void {
     this.rest.getUniprotList(this.includeParam, page, perPage)

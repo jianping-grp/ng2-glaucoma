@@ -1,11 +1,57 @@
-<form #databaseBrowseForm="ngForm" (ngSubmit)="submit()">
-  <md-select placeholder="browse type" [(ngModel)]="selectedType" name="databaseBrowseType">
-    <md-option *ngFor="let dataTypeEl of dataTypeList" [value]="dataTypeEl.value">
-      {{dataTypeEl.viewValue}}
-    </md-option>
-  </md-select>
-  <md-form-field>
-    <input mdInput [placeholder]="getDataTypePlaceholder()" [(ngModel)]="dataType" disabled name="dataType">
-  </md-form-field>
-  <button md-raised-button type="submit" color="primary" [disabled]="databaseBrowseForm.invalid">Submit</button>
-</form>
+<!--<md-list>-->
+  <!--<md-list-item *ngFor="let dataTypeEl of dataTypeList">-->
+    <!--<button md-button color="primary">{{dataTypeEl.viewValue}}</button>-->
+  <!--</md-list-item>-->
+<!--</md-list>-->
+<br>
+<md-list >
+  <md-divider></md-divider>
+  <md-list-item>
+    <a mdLine routerLink="/compound-list" routerLinkActive="active">Compounds</a>
+    <small mdLine>compounds targeting glaucoma related proteins</small>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-list-item>
+    <a mdLine routerLink="/uniprot-list" routerLinkActive="active">Targets</a>
+    <small mdLine>proteins related to glaucoma</small>
+  </md-list-item>
+  <md-divider></md-divider>
+  <md-list-item>
+    <a mdLine routerLink="/product-list" routerLinkActive="active">Drugs</a>
+    <small mdLine>drugs for glaucoma treatment</small>
+  </md-list-item>
+  <md-divider></md-divider>
+</md-list>
+
+
+<!--<table class="mdl-data-table mdl-shadow&#45;&#45;2dp" >-->
+  <!--<tr>-->
+    <!--<th>Data Type</th>-->
+    <!--<th>Detail Infomation</th>-->
+  <!--</tr>-->
+
+  <!--<tr *ngFor="let dataTypeEl of dataTypeList">-->
+    <!--<td>-->
+      <!--<button class="mdl-button md-js-button md-button&#45;&#45;raised">{{dataTypeEl.viewValue}}</button>-->
+    <!--</td>-->
+    <!--<td>{{dataTypeEl.placeholder}}</td>-->
+    <!--</tr>-->
+<!--</table>-->
+
+<!--<br>-->
+<!--<button md-raised-button color="primary" *ngFor="let dataTypeEl of dataTypeList">{{dataTypeEl.viewValue}}</button>-->
+
+
+
+
+<!--<form #databaseBrowseForm="ngForm" (ngSubmit)="submit()">-->
+  <!--<md-select placeholder="browse type" [(ngModel)]="selectedType" name="databaseBrowseType">-->
+    <!--<md-option *ngFor="let dataTypeEl of dataTypeList" [value]="dataTypeEl.value">-->
+      <!--{{dataTypeEl.viewValue}}-->
+    <!--</md-option>-->
+  <!--</md-select>-->
+  <!--<md-form-field>-->
+    <!--<input mdInput [placeholder]="getDataTypePlaceholder()" [(ngModel)]="dataType" disabled name="dataType">-->
+  <!--</md-form-field>-->
+  <!--<button md-raised-button type="submit" color="primary" [disabled]="databaseBrowseForm.invalid">Submit</button>-->
+<!--</form>-->

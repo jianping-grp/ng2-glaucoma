@@ -12,7 +12,7 @@
   <ng-container mdColumnDef="compounds">
     <md-header-cell *mdHeaderCellDef>Compound-detail</md-header-cell>
     <md-cell *mdCellDef="let row">
-      <button md-button color="primary" (click)="goCompoundDetail(row.compounds)">view</button>
+      <button md-button color="primary" (click)="goCompoundByUid(row.id)">view</button>
     </md-cell>
   </ng-container>
 

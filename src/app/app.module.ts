@@ -23,8 +23,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import {CompoundListComponent} from "./main-content/compound/compound-list/compound-list.component"
 import {UniprotListComponent} from "./main-content/uniprot/uniprot-list/uniprot-list.component";
 import {ProductListComponent} from "./main-content/product/product-list/product-list.component"
-import {UniprotDetailComponent} from "./main-content/uniprot/uniprot-detail/uniprot-detail.component";
-import {CompoundDetailByUidComponent} from "./main-content/compound/compound-detail-byUid/compound-detail-by-uid.component";
+import {UniprotByCidComponent} from "./main-content/uniprot/uniprot-by-cid/uniprot-by-cid.component";
+import {CompoundByUidComponent} from "./main-content/compound/compound-by-uid/compound-by-uid.component";
 import {JsmeModule} from "./jsme/jsme.module";
 import {KeywordSearchComponent} from "./side-panel/keyword-search/keyword-search.component";
 import {ProductByNameComponent} from "./main-content/product/product-by-name/product-by-name.component";
@@ -40,8 +40,8 @@ import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smi
     CompoundListComponent,
     UniprotListComponent,
     ProductListComponent,
-    UniprotDetailComponent,
-    CompoundDetailByUidComponent,
+    UniprotByCidComponent,
+    CompoundByUidComponent,
     ProductByNameComponent,
     CompoundBySmilesComponent,
   ],
