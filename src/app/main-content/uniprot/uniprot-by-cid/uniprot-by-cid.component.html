@@ -1,11 +1,20 @@
 <!--Uniprot Basic Infomation-->
-<table class="mdl-data-table mdl-shadow--2dp">
+<h5>Compound Infomation:</h5>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow-2dp">
   <tr>
-    <th>GenericName: </th>
-    <td>{{compound?.generic_name}}</td>
+    <th>Compound</th>
+    <th>Formula</th>
+    <th>Mol Weight</th>
+    <th>Cas</th>
+    <th>AlogP</th>
+    <th>HBA</th>
+    <th>HBD</th>
+    <th>RTB</th>
+    <th>PSA</th>
+    <th>Drug Status</th>
+    <th>Drugbank ID</th>
   </tr>
   <tr>
-    <th>Smiles: </th>
     <td>
       <app-jsme [elementId]="compound?.id"
                 [width]="100"
@@ -14,52 +23,110 @@
                 [molString]="compound?.smiles"
       >
       </app-jsme>
+      <a [href]="compound?.chembl_link"><button mat-button color="primary">{{compound?.generic_name}}</button></a>
     </td>
-  </tr>
-  <tr>
-    <th>MolWeight: </th>
+    <td>{{compound?.formula}}</td>
     <td>{{compound?.mol_weight}}</td>
+    <td>{{compound?.cas}}</td>
+    <td>{{compound?.alogp}}</td>
+    <td>{{compound?.hba}}</td>
+    <td>{{compound?.hbd}}</td>
+    <td>{{compound?.rtb}}</td>
+    <td>{{compound?.psa}}</td>
+    <td>{{compound?.drug_status}}</td>
+    <td>{{compound?.drugbank_id}}</td>
   </tr>
 </table>
 <br>
-<!--Uniprot Table-->
-<md-table #uniprotByCidTable [dataSource]="uniprotByCidDataSource">
-  <ng-container mdColumnDef="entry">
-    <md-header-cell *mdHeaderCellDef>Entry</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.entry}}</md-cell>
+<br>
+
+<h5>Target Infomation:</h5>
+<mat-table #uniprotByCidTable [dataSource]="uniprotByCidDataSource">
+  <ng-container matColumnDef="uniprot_chembl_id">
+    <mat-header-cell *matHeaderCellDef>ChEMBL ID</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a href="https://www.ebi.ac.uk/chembl/target/inspect/{{row.uniprot_chembl_id}}">
+        <button mat-button color="primary">{{row.uniprot_chembl_id}}</button>
+      </a>
+    </mat-cell>
   </ng-container>
 
-<ng-container mdColumnDef="entryname">
-  <md-header-cell *mdHeaderCellDef>Entryname</md-header-cell>
-  <md-cell *mdCellDef="let row">{{row.entryname}}</md-cell>
-</ng-container>
+  <ng-container matColumnDef="entry">
+    <mat-header-cell *matHeaderCellDef>Entry</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a href="http://www.uniprot.org/uniprot/{{row.entry}}">
+        <button mat-button color="primary">{{row.entry}}</button>
+      </a>
+    </mat-cell>
+  </ng-container>
 
-<ng-container mdColumnDef="compounds">
-  <md-header-cell *mdHeaderCellDef>Compound-detail</md-header-cell>
-  <md-cell *mdCellDef="let row">
-    <button md-button color="primary" (click)="goCompoundDetail(row.compounds)">view</button>
-  </md-cell>
-</ng-container>
+  <ng-container matColumnDef="entryname">
+    <mat-header-cell *matHeaderCellDef>Entryname</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.entryname}}</mat-cell>
+  </ng-container>
 
-<md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-<md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
-</md-table>
+  <ng-container matColumnDef="uniprot_type">
+    <mat-header-cell *matHeaderCellDef>Target Type</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.uniprot_type}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="uniprot_descriptor">
+    <mat-header-cell *matHeaderCellDef>Target Description</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.uniprot_descriptor}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="kegg_name">
+    <mat-header-cell *matHeaderCellDef>KEGG Pathway</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a [href]="row.kegg_url"><button mat-button color="primary">{{row.kegg_name}}</button></a>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="uniprot_all_pathway">
+    <mat-header-cell *matHeaderCellDef>All Pathway</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button color="primary" (click)="goUniprotAllPathwayByUid(row.id)">view</button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="compounds">
+    <mat-header-cell *matHeaderCellDef>Compounds</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button color="primary" (click)="goCompoundByUid(row.id)">view</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
 <mat-paginator [length]="pageMeta?.total_results"
-               [pageSize]="pageMeta?.per_page"
-               (page)="pageChange($event)"
->
-</mat-paginator>
+              [pageSize]="pageMeta?.per_page"
+              (page)="pageChange($event)"
+></mat-paginator>
 
-<!--<table class="table table-striped table-hover table-responsive">-->
+
+<!--Material compound table-->
+<!--<table class="matl-data-table matl-shadow&#45;&#45;2dp">-->
   <!--<tr>-->
-    <!--<th>#</th>-->
-    <!--<th>entry</th>-->
-    <!--<th>entryName</th>-->
+    <!--<th>GenericName: </th>-->
+    <!--<td>{{compound?.generic_name}}</td>-->
   <!--</tr>-->
-
-  <!--<tr *ngFor="let uniprot of uniprotDetail; let i= index">-->
-    <!--<td>{{i+1}}</td>-->
-    <!--<td>{{uniprot.entry}}</td>-->
-    <!--<td>{{uniprot.entryname}}</td>-->
+  <!--<tr>-->
+    <!--<th>Smiles: </th>-->
+    <!--<td>-->
+      <!--<app-jsme [elementId]="compound?.id"-->
+                <!--[width]="100"-->
+                <!--[height]="100"-->
+                <!--[option]="'depict nozoom noshowdraganddropsymbolindepictmode'"-->
+                <!--[molString]="compound?.smiles"-->
+      <!--&gt;-->
+      <!--</app-jsme>-->
+    <!--</td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<th>MolWeight: </th>-->
+    <!--<td>{{compound?.mol_weight}}</td>-->
   <!--</tr>-->
 <!--</table>-->
+<!--<br>-->
