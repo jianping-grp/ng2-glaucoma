@@ -2,12 +2,13 @@ import {Component, OnInit} from "@angular/core";
 import {Uniprot} from "../../../models/uniprot";
 import {PageMeta} from "../../../models/page-meta";
 import {RestService} from "../../../service/rest/rest.service";
-import {ActivatedRoute, ParamMap, Params,} from "@angular/router";
+import {ActivatedRoute, ParamMap, Params, Router,} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 import {Compound} from "../../../models/compound";
 import {UniprotListDataSource} from "../uniprot-list.data.source";
 import {Observable} from "rxjs/Observable";
 import "rxjs/add/operator/map";
+
 
 
 @Component({
@@ -24,13 +25,27 @@ export class UniprotByCidComponent implements OnInit {
   pageMeta: PageMeta | null;
 
   constructor(private rest: RestService,
-              private route: ActivatedRoute) {
-    this.displayedColumns = ['entry', 'entryname'];
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
+      'kegg_name',  'uniprot_descriptor','uniprot_all_pathway', 'compounds'];
   }
 
   ngOnInit() {
     console.log('uniprot by Cid init');
     this._getData();
+  }
+
+  goCompoundByUid(id: any) {
+    this.router.navigate(['/compound-by-uid', id])
+  }
+
+  goUniprotByCid(id: any) {
+    this.router.navigate(['/uniprot-by-cid', id])
+  }
+
+  goUniprotAllPathwayByUid(id: any) {
+    this.router.navigate(['/uniprot-all-pathway', id])
   }
 
   private _getData(page?, perPage?):void {
@@ -51,7 +66,8 @@ export class UniprotByCidComponent implements OnInit {
         this.rest.getCompoundDetail(id, this.includeParam)
           .subscribe(data => {
             this.compound = data['compound']
-          })
+          });
+
     })
 
   }

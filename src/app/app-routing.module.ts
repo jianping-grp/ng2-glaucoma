@@ -7,6 +7,8 @@ import {UniprotByCidComponent} from "./main-content/uniprot/uniprot-by-cid/unipr
 import {CompoundByUidComponent} from "./main-content/compound/compound-by-uid/compound-by-uid.component";
 import {ProductByNameComponent} from "./main-content/product/product-by-name/product-by-name.component";
 import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smiles/compound-by-smiles.component"
+import {UniprotAllPathwayComponent} from "./main-content/uniprot-all-pathways/uniprot-all-pathway.component";
+import {UniprotDbCompoundComponent} from "./main-content/uniprot-db-compound/uniprot-db-compound.component";
 
 const routes: Routes = [
   // {
@@ -32,6 +34,12 @@ const routes: Routes = [
   },
   {
     path: 'compound-by-smiles/:smiles', component: CompoundBySmilesComponent,
+  },
+  {
+    path: 'uniprot-all-pathway/:id', component: UniprotAllPathwayComponent,
+  },
+  {
+    path: 'uniprot-db-compound/:id', component: UniprotDbCompoundComponent,
   }
 ];
 

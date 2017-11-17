@@ -1,22 +1,7 @@
-<md-table #productListTable [dataSource]="productListDataSource">
-  <ng-container mdColumnDef="name">
-    <md-header-cell *mdHeaderCellDef>DrugName</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.name}}</md-cell>
-  </ng-container>
-
-  <ng-container mdColumnDef="generic_name">
-    <md-header-cell *mdHeaderCellDef>GenricName</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.compound.generic_name}}</md-cell>
-  </ng-container>
-
-  <ng-container mdColumnDef="cas">
-    <md-header-cell *mdHeaderCellDef>Cas</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.compound.cas}}</md-cell>
-  </ng-container>
-
-  <ng-container mdColumnDef="smiles">
-    <md-header-cell *mdHeaderCellDef>Smiles</md-header-cell>
-    <md-cell *mdCellDef="let row">
+<mat-table #productListTable [dataSource]="productListDataSource">
+  <ng-container matColumnDef="generic_name">
+    <mat-header-cell *matHeaderCellDef>Compound</mat-header-cell>
+    <mat-cell *matCellDef="let row">
       <app-jsme [elementId]="row.id"
                 [width]="100"
                 [height]="100"
@@ -24,31 +9,77 @@
                 [molString]="row.compound.smiles"
       >
       </app-jsme>
-    </md-cell>
+      <a [href]="row.chembl_link"><button mat-button color="primary">{{row.compound.generic_name}}</button></a>
+    </mat-cell>
   </ng-container>
 
-  <ng-container mdColumnDef="mol_weight">
-    <md-header-cell *mdHeaderCellDef>MolWeight</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.compound.mol_weight}}</md-cell>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
   </ng-container>
 
-  <ng-container mdColumnDef="drugbank_id">
-    <md-header-cell *mdHeaderCellDef>DrugBankId</md-header-cell>
-    <md-cell *mdCellDef="let row">{{row.compound.drugbank_id}}</md-cell>
+  <ng-container matColumnDef="formula">
+    <mat-header-cell *matHeaderCellDef>Formula</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.formula}}</mat-cell>
   </ng-container>
 
-  <ng-container mdColumnDef="uniprot">
-    <md-header-cell *mdHeaderCellDef>Target</md-header-cell>
-    <md-cell *mdCellDef="let row">
-      <button md-button color="primary" (click)="goUniprotDetail(row.compound.id)">view</button>
-    </md-cell>
+  <ng-container matColumnDef="mol_weight">
+    <mat-header-cell *matHeaderCellDef>Mol Weight</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.mol_weight}}</mat-cell>
   </ng-container>
 
-  <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-  <md-row *mdRowDef="let row; columns: displayedColumns"></md-row>
-</md-table>
+  <ng-container matColumnDef="cas">
+    <mat-header-cell *matHeaderCellDef>Cas</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.cas}}</mat-cell>
+  </ng-container>
 
-<md-paginator [length]="pageMeta?.total_results"
+  <ng-container matColumnDef="alogp">
+    <mat-header-cell *matHeaderCellDef>ALogP</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.alogp}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hba">
+    <mat-header-cell *matHeaderCellDef>HBA</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.hba}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="hbd">
+    <mat-header-cell *matHeaderCellDef>HBD</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.hbd}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="rtb">
+    <mat-header-cell *matHeaderCellDef>RTB</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.rtb}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="psa">
+    <mat-header-cell *matHeaderCellDef>PSA</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.psa}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="drug_status">
+    <mat-header-cell *matHeaderCellDef>Drug Status</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.drug_status}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="drugbank_id">
+    <mat-header-cell *matHeaderCellDef>DrugBank ID</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{row.compound.drugbank_id}}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="uniprotinfo_set">
+    <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button color="primary" (click)="goUniprotByCid(row.id)">view</button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
+<mat-paginator [length]="pageMeta?.total_results"
               [pageSize]="pageMeta?.per_page"
               (page)="pageChange($event)"
-></md-paginator>
+></mat-paginator>

@@ -22,7 +22,8 @@ export class ProductListComponent implements OnInit {
               private rest: RestService,
               ) {
     this.displayedColumns = [
-      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'uniprot'
+      'generic_name', 'name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
+      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
 
@@ -31,8 +32,8 @@ export class ProductListComponent implements OnInit {
     this._getProductList();
   }
 
-  goUniprotDetail(id: any) {
-    this.router.navigate(['/uniprot-by-cid', id])
+  goUniprotByCid(id: any) {
+    this.router.navigate(['/uniprot-by-cid',id])
   }
 
   private _getProductList(page?, perPage?): void {

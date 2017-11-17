@@ -1,0 +1,9 @@
+mat-grid-list{
+  border-style: solid;
+  border-width: 1px;
+  border-color:rgba(0,0,0,.12);
+}
+
+.text-position{
+  text-align: center;
+}

@@ -40,7 +40,8 @@ export class StructureSearchComponent implements OnInit {
     };
     console.log(typeof similarityValue);
     // selectedStructureType is 'structure' denotes structure search while 'substructure' denotes substructure search
-    this.router.navigate(['/compound-by-smiles',smiles], {queryParams: {selectedStructureType: this.selectedStructureType, similarityValue: similarityValue}})
+    this.router.navigate(['/compound-by-smiles', smiles], {queryParams: {selectedStructureType: this.selectedStructureType,
+      similarityValue: similarityValue}})
   }
 
 }

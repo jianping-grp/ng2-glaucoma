@@ -21,7 +21,8 @@ export class UniprotListComponent implements OnInit {
   constructor(private rest: RestService,
               private router: Router,
               private route: ActivatedRoute) {
-    this.displayedColumns = ['entry', 'entryname', 'compounds']
+    this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
+      'kegg_name',  'uniprot_descriptor', 'uniprot_all_pathway','uniprot_db_compound','compounds']
   }
 
   ngOnInit() {
@@ -29,8 +30,16 @@ export class UniprotListComponent implements OnInit {
     this._getUniprotList();
   }
 
-  goCompoundByUid(id: string) {
+  goCompoundByUid(id: any) {
     this.router.navigate(['/compound-by-uid',id])
+  }
+
+  goUniprotAllPathwayByUid(id: any) {
+    this.router.navigate(['/uniprot-all-pathway', id])
+  }
+
+  goUniprotDbCompoundByUid(id: any) {
+    this.router.navigate(['/uniprot-db-compound', id])
   }
 
   // goCompoundDetail(compounds: Compound[]) {

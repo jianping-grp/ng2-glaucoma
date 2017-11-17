@@ -6,23 +6,25 @@
 </app-jsme>
 <br/>
 <form #structureSearchForm (ngSubmit)="submit(applet.smiles)">
-  <md-select placeholder="search type" [(ngModel)]="selectedStructureType" name="structureSearchType">
-    <md-option *ngFor="let searchTypeEl of structureSearchTypeList" [value]="searchTypeEl.value">
-      {{searchTypeEl.viewValue}}
-    </md-option>
-  </md-select>
-
-  <!--<md-form-field>-->
+  <mat-form-field>
+    <mat-select placeholder="search type" [(ngModel)]="selectedStructureType" name="structureSearchType">
+      <mat-option *ngFor="let searchTypeEl of structureSearchTypeList" [value]="searchTypeEl.value">
+        {{searchTypeEl.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!--<mat-form-field>-->
     <!--<input mdInput [placeholder]="getSearchTypePlaceholder()" disabled>-->
-  <!--</md-form-field>-->
+  <!--</mat-form-field>-->
 
-  <md-select placeholder="similarity value" [(ngModel)]="selectedSimilarityValue" name="similarityValue" [disabled]="selectedStructureType==='substructure'">
-    <md-option *ngFor="let similarity of similarityValueList" [value]="similarity">
-      {{similarity}}
-    </md-option>
-    </md-select>
-
-  <button md-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
+  <mat-form-field>
+    <mat-select placeholder="similarity value" [(ngModel)]="selectedSimilarityValue" name="similarityValue" [disabled]="selectedStructureType==='substructure'">
+      <mat-option *ngFor="let similarity of similarityValueList" [value]="similarity">
+        {{similarity}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
 
 </form>
 

@@ -16,13 +16,14 @@ export class CompoundListComponent implements OnInit {
   compoundListDataSource: CompoundsListDataSource;
   pageMeta: PageMeta | null;
   displayedColumns: string[];
-  includeParam =''; //todo  add includeParams
+  includeParam ='';
 
   constructor(private rest: RestService,
               private router: Router,
               private route: ActivatedRoute){
     this.displayedColumns = [
-      'generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'links'
+       'generic_name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
+      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
 
@@ -36,7 +37,7 @@ export class CompoundListComponent implements OnInit {
   }
 
   private _getCompoundList(page?, perPage?): void {
-    this.rest.getCompoundList(this.includeParam,page, perPage)
+    this.rest.getCompoundList(this.includeParam, page, perPage)
        .subscribe(data => {
           this.compoundList = data['compounds'];
           this.compoundListDataSource = new CompoundsListDataSource(this.compoundList);

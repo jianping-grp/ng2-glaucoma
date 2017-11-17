@@ -8,11 +8,12 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MdButtonModule, MdCheckboxModule, MdExpansionModule, MdIconModule, MdInputModule, MdListModule, MdMenuModule,
-  MdPaginatorModule,
-  MdProgressBarModule, MdSelectModule, MdSidenavModule, MdTableModule,
-  MdTabsModule,
-  MdToolbarModule, MdTooltipModule
+  MatButtonModule, MatCheckboxModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule,
+  MatListModule, MatMenuModule,
+  MatPaginatorModule,
+  MatProgressBarModule, MatSelectModule, MatSidenavModule, MatTableModule,
+  MatTabsModule,
+  MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {GlobalService} from "./service/global/global.service";
 
@@ -30,6 +31,8 @@ import {KeywordSearchComponent} from "./side-panel/keyword-search/keyword-search
 import {ProductByNameComponent} from "./main-content/product/product-by-name/product-by-name.component";
 import {StructureSearchComponent} from "./side-panel/structure-search/structure-search.component"
 import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smiles/compound-by-smiles.component";
+import {UniprotAllPathwayComponent} from "./main-content/uniprot-all-pathways/uniprot-all-pathway.component";
+import {UniprotDbCompoundComponent} from "./main-content/uniprot-db-compound/uniprot-db-compound.component";
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smi
     CompoundByUidComponent,
     ProductByNameComponent,
     CompoundBySmilesComponent,
+    UniprotAllPathwayComponent,
+    UniprotDbCompoundComponent,
   ],
   imports: [
     HttpModule,
@@ -54,21 +59,22 @@ import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smi
     BrowserAnimationsModule,
     JsmeModule,
     AppRoutingModule,
-    MdButtonModule,
-    MdIconModule,
-    MdMenuModule,
-    MdSidenavModule,
-    MdToolbarModule,
-    MdProgressBarModule,
-    MdCheckboxModule,
-    MdPaginatorModule,
-    MdTabsModule,
-    MdTooltipModule,
-    MdExpansionModule,
-    MdInputModule,
-    MdTableModule,
-    MdListModule,
-    MdSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatProgressBarModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatTabsModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatTableModule,
+    MatListModule,
+    MatSelectModule,
+    MatGridListModule,
   ],
   providers: [GlobalService, RestService],
   bootstrap: [AppComponent]

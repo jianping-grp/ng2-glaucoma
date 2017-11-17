@@ -1,88 +1,88 @@
 <!--toolbar-->
-<md-toolbar color="primary">
+<mat-toolbar color="primary">
   <span class="sidenav-toggle">
-    <button md-mini-fab (click)="sidenav.toggle()">
-      <md-icon>menu</md-icon>
+    <button mat-mini-fab (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
   </span>
   <span>GLAUCOMA</span>
-</md-toolbar>
+</mat-toolbar>
 
 <!--Progress Bar-->
-<md-progress-bar *ngIf="loadingStatus"
+<mat-progress-bar *ngIf="loadingStatus"
                  mode="query"
                  color="accent"
                  class="global-progress-bar"
-></md-progress-bar>
+></mat-progress-bar>
 
 <!--Side Panel-->
-<md-sidenav-container class="sidenav-fab-container">
-  <md-sidenav #sidenav mode="side" opened="true">
+<mat-sidenav-container class="sidenav-fab-container">
+  <mat-sidenav #sidenav mode="side" opened="true">
     <div class="scrolling-content">
-      <md-tab-group>
+      <mat-tab-group>
 
-        <md-tab>
-          <ng-template md-tab-label>
-            <md-icon>search</md-icon>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>search</mat-icon>
             Search
           </ng-template>
 
-        <md-accordion class="headers-align">
-          <md-expansion-panel [expanded]="true">
-            <md-expansion-panel-header>
-              <md-panel-title>
+        <mat-accordion class="headers-align">
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
                 Keyword Search
-              </md-panel-title>
-              <md-panel-description>
+              </mat-panel-title>
+              <mat-panel-description>
                 Search drug for Glaucoma treatment by drug name
-              </md-panel-description>
-            </md-expansion-panel-header>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
             <app-keyword-search></app-keyword-search>
-          </md-expansion-panel>
+          </mat-expansion-panel>
 
-          <md-expansion-panel>
-            <md-expansion-panel-header>
-              <md-panel-title>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
                 Structure search
-              </md-panel-title>
-              <md-panel-description>
+              </mat-panel-title>
+              <mat-panel-description>
                 Search molecules by drawing molecular structure.
-              </md-panel-description>
-            </md-expansion-panel-header>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
             <app-structure-search></app-structure-search>
 
-          </md-expansion-panel>
-        </md-accordion>
-        </md-tab>
+          </mat-expansion-panel>
+        </mat-accordion>
+        </mat-tab>
 
         <!--Browse-->
-        <md-tab>
-          <ng-template md-tab-label>
-            <md-icon>import_contacts</md-icon>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>import_contacts</mat-icon>
             Browse
           </ng-template>
 
-          <md-accordion class="headers-align">
-            <md-expansion-panel [expanded]="true">
-              <md-expansion-panel-header>
-                <md-panel-title>
+          <mat-accordion class="headers-align">
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
                   Database Browse
-                </md-panel-title>
-                <md-panel-description>
+                </mat-panel-title>
+                <mat-panel-description>
                   Browse compounds/drugs/targets
-                </md-panel-description>
-              </md-expansion-panel-header>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
               <app-database-browse></app-database-browse>
-            </md-expansion-panel>
-          </md-accordion>
-        </md-tab>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-tab>
 
-      </md-tab-group>
+      </mat-tab-group>
     </div>
-  </md-sidenav>
+  </mat-sidenav>
 
   <div class="scrolling-content">
     <!--Result entity list or entity detail-->
     <router-outlet></router-outlet>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>

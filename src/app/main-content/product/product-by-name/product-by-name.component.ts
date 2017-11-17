@@ -21,26 +21,27 @@ export class ProductByNameComponent implements OnInit {
               private router: Router,
               private rest: RestService) {
     this.displayedColumns = [
-      'name','generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'uniprot'
+      'generic_name', 'name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
+      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
 
   ngOnInit() {
     console.log('compound by name');
-    this._getCompoundByName();
+    this._getProductsByName();
   }
 
-  goUniprotDetail(id: any) {
-    this.router.navigate(['/uniprot-by-cid', id])
+  goUniprotByCid(id: any) {
+    this.router.navigate(['/uniprot-by-cid',id])
   }
 
-  private _getCompoundByName(page?, perPage?): void {
+  private _getProductsByName(page?, perPage?): void {
    this.route.queryParamMap
      .subscribe((params: ParamMap) => {
      if (params.has('keyword')) {
        let keyword = params.get('keyword');
        console.log(`retrieve compound by keyword: ${keyword}`);
-       this.rest.getCompoundsByName(this.includeParam, keyword, page, perPage)
+       this.rest.getProductsByName(this.includeParam, keyword, page, perPage)
          .subscribe(data => {
            this.products = data['products'];
            this.productDataSource = new ProductListDataSource(this.products);
@@ -53,6 +54,6 @@ export class ProductByNameComponent implements OnInit {
   }
 
   pageChange(event) {
-    this._getCompoundByName(event.pageIndex, event.pageSize)
+    this._getProductsByName(event.pageIndex, event.pageSize)
   }
 }

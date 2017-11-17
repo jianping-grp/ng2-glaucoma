@@ -12,7 +12,7 @@ import {PageMeta} from "../../../models/page-meta";
 })
 
 export class CompoundBySmilesComponent implements OnInit {
-  compound: Compound[];
+  compounds: Compound[];
   compoundDataSource: CompoundsListDataSource;
   displayedColumns: string[];
   pageMeta: PageMeta | null;
@@ -23,7 +23,8 @@ export class CompoundBySmilesComponent implements OnInit {
               private router: Router
               ){
     this.displayedColumns = [
-      'generic_name','cas', 'smiles', 'mol_weight', 'drugbank_id', 'links'
+      'generic_name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
+      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
 
@@ -33,7 +34,7 @@ export class CompoundBySmilesComponent implements OnInit {
 
   }
 
-  goUniprotDetail(id: any) {
+  goUniprotByCid(id: any) {
     this.router.navigate(['/uniprot-by-cid', id])
   }
 
@@ -48,10 +49,10 @@ export class CompoundBySmilesComponent implements OnInit {
             console.log(params.has('similarityValue'));
           if (params.get('selectedStructureType') === 'structure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], similarity,  page, perPage))
+              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], similarity, page, perPage))
               .subscribe(data => {
-                  this.compound = data['compounds'];
-                  this.compoundDataSource = new CompoundsListDataSource(this.compound);
+                  this.compounds = data['compounds'];
+                  this.compoundDataSource = new CompoundsListDataSource(this.compounds);
                   this.pageMeta = data['meta'];
 
                 },
@@ -63,8 +64,8 @@ export class CompoundBySmilesComponent implements OnInit {
             this.route.params
               .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles'], page, perPage))
               .subscribe(data => {
-                  this.compound = data['compounds'];
-                  this.compoundDataSource = new CompoundsListDataSource(this.compound);
+                  this.compounds = data['compounds'];
+                  this.compoundDataSource = new CompoundsListDataSource(this.compounds);
                   this.pageMeta = data['meta'];
                 },
                 error => {
