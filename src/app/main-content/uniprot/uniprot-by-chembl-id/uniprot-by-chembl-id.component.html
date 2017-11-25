@@ -1,47 +1,5 @@
-<!--Uniprot Basic Infomation-->
-<h5>Compound Infomation:</h5>
-<table class="mdl-data-table mdl-js-data-table mdl-shadow-2dp">
-  <tr>
-    <th>Compound</th>
-    <th>Formula</th>
-    <th>Mol Weight</th>
-    <th>Cas</th>
-    <th>AlogP</th>
-    <th>HBA</th>
-    <th>HBD</th>
-    <th>RTB</th>
-    <th>PSA</th>
-    <th>Drug Status</th>
-    <th>Drugbank ID</th>
-  </tr>
-  <tr>
-    <td>
-      <app-jsme [elementId]="compound?.id"
-                [width]="100"
-                [height]="100"
-                [option]="'depict nozoom noshowdraganddropsymbolindepictmode'"
-                [molString]="compound?.smiles"
-      >
-      </app-jsme>
-      <a [href]="compound?.chembl_link"><button mat-button color="primary">{{compound?.generic_name}}</button></a>
-    </td>
-    <td>{{compound?.formula}}</td>
-    <td>{{compound?.mol_weight}}</td>
-    <td>{{compound?.cas}}</td>
-    <td>{{compound?.alogp}}</td>
-    <td>{{compound?.hba}}</td>
-    <td>{{compound?.hbd}}</td>
-    <td>{{compound?.rtb}}</td>
-    <td>{{compound?.psa}}</td>
-    <td>{{compound?.drug_status}}</td>
-    <td>{{compound?.drugbank_id}}</td>
-  </tr>
-</table>
-<br>
-<br>
-
 <h5>Target Infomation:</h5>
-<mat-table #uniprotByCidTable [dataSource]="uniprotByCidDataSource">
+<mat-table #uniprotByChemblIdTable [dataSource]="uniprotByChemblIdDataSource">
   <ng-container matColumnDef="uniprot_chembl_id">
     <mat-header-cell *matHeaderCellDef>ChEMBL ID</mat-header-cell>
     <mat-cell *matCellDef="let row">
@@ -101,32 +59,6 @@
 </mat-table>
 
 <mat-paginator [length]="pageMeta?.total_results"
-              [pageSize]="pageMeta?.per_page"
-              (page)="pageChange($event)"
+               [pageSize]="pageMeta?.per_page"
+               (page)="pageChange($event)"
 ></mat-paginator>
-
-
-<!--Material compound table-->
-<!--<table class="matl-data-table matl-shadow&#45;&#45;2dp">-->
-  <!--<tr>-->
-    <!--<th>GenericName: </th>-->
-    <!--<td>{{compound?.generic_name}}</td>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<th>Smiles: </th>-->
-    <!--<td>-->
-      <!--<app-jsme [elementId]="compound?.id"-->
-                <!--[width]="100"-->
-                <!--[height]="100"-->
-                <!--[option]="'depict nozoom noshowdraganddropsymbolindepictmode'"-->
-                <!--[molString]="compound?.smiles"-->
-      <!--&gt;-->
-      <!--</app-jsme>-->
-    <!--</td>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<th>MolWeight: </th>-->
-    <!--<td>{{compound?.mol_weight}}</td>-->
-  <!--</tr>-->
-<!--</table>-->
-<!--<br>-->

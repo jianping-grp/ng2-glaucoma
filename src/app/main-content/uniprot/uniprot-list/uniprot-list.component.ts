@@ -16,13 +16,13 @@ export class UniprotListComponent implements OnInit {
   uniprotListDataSource: UniprotListDataSource;
   pageMeta: PageMeta | null;
   displayedColumns: string[];
-  includeParam='';
+  includeParam='?exclude[]=compounds.*&include[]=compounds.id'; //use for count compounds
 
   constructor(private rest: RestService,
               private router: Router,
               private route: ActivatedRoute) {
     this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
-      'kegg_name',  'uniprot_descriptor', 'uniprot_all_pathway','uniprot_db_compound','compounds']
+      'kegg_name',  'uniprot_descriptor', 'uniprot_all_pathway', 'uniprot_db_compound','compounds']
   }
 
   ngOnInit() {

@@ -56,7 +56,7 @@
   <ng-container matColumnDef="compounds">
     <mat-header-cell *matHeaderCellDef>Compounds</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-button color="primary" (click)="goCompoundByUid(row.id)">view</button>
+      <button mat-button color="primary" (click)="goCompoundByUid(row.id)">{{row.compounds.length}}</button>
     </mat-cell>
   </ng-container>
 

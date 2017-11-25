@@ -18,9 +18,9 @@ import "rxjs/add/operator/map";
 
 export class UniprotByCidComponent implements OnInit {
   compound: Compound;
-  uniprot: Uniprot[];
+  uniprots: Uniprot[];
   uniprotByCidDataSource: UniprotListDataSource;
-  includeParam = '';
+  includeParam = '&exclude[]=compounds.*&include[]=compounds.id'; //use for count compounds
   displayedColumns: string[];
   pageMeta: PageMeta | null;
 
@@ -55,15 +55,15 @@ export class UniprotByCidComponent implements OnInit {
         //fetch uniprot list by compound id
         this.rest.getUniprotByCid(id, this.includeParam, page, perPage)
           .subscribe(data => {
-            this.uniprot = data['uniprot_infos'];
-            this.uniprotByCidDataSource = new UniprotListDataSource(this.uniprot);
+            this.uniprots = data['uniprot_infos'];
+            this.uniprotByCidDataSource = new UniprotListDataSource(this.uniprots);
             this.pageMeta = data['meta'];
           },
           error => {},
             () => {},
             );
         //fetch compound detail
-        this.rest.getCompoundDetail(id, this.includeParam)
+        this.rest.getCompoundDetail(id, '')
           .subscribe(data => {
             this.compound = data['compound']
           });

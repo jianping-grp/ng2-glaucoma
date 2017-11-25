@@ -33,6 +33,9 @@ import {StructureSearchComponent} from "./side-panel/structure-search/structure-
 import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smiles/compound-by-smiles.component";
 import {UniprotAllPathwayComponent} from "./main-content/uniprot-all-pathways/uniprot-all-pathway.component";
 import {UniprotDbCompoundComponent} from "./main-content/uniprot-db-compound/uniprot-db-compound.component";
+import {TargetPredictionComponent} from "./main-content/tatget-prediction/target-prediction.component";
+import {UniprotByChemblIdComponent} from "./main-content/uniprot/uniprot-by-chembl-id/uniprot-by-chembl-id.component";
+import {UniprotByNameComponent} from "./main-content/uniprot/uniprot-by-name/uniprot-by-name.component";
 
 @NgModule({
   declarations: [
@@ -46,9 +49,12 @@ import {UniprotDbCompoundComponent} from "./main-content/uniprot-db-compound/uni
     UniprotByCidComponent,
     CompoundByUidComponent,
     ProductByNameComponent,
+    UniprotByNameComponent,
     CompoundBySmilesComponent,
     UniprotAllPathwayComponent,
     UniprotDbCompoundComponent,
+    TargetPredictionComponent,
+    UniprotByChemblIdComponent,
   ],
   imports: [
     HttpModule,

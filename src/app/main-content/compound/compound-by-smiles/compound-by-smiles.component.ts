@@ -16,6 +16,7 @@ export class CompoundBySmilesComponent implements OnInit {
   compoundDataSource: CompoundsListDataSource;
   displayedColumns: string[];
   pageMeta: PageMeta | null;
+  includeParam='?exclude[]=uniprotinfo_set.*&include[]=uniprotinfo_set.id'; //use for count uniprot
   // similarity='';
 
   constructor(private rest: RestService,
@@ -49,7 +50,7 @@ export class CompoundBySmilesComponent implements OnInit {
             console.log(params.has('similarityValue'));
           if (params.get('selectedStructureType') === 'structure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], similarity, page, perPage))
+              .switchMap((params: Params) => this.rest.postCompoundByStructure(params['smiles'], similarity, this.includeParam, page, perPage))
               .subscribe(data => {
                   this.compounds = data['compounds'];
                   this.compoundDataSource = new CompoundsListDataSource(this.compounds);
@@ -62,7 +63,7 @@ export class CompoundBySmilesComponent implements OnInit {
                 })
           }else if(params.get('selectedStructureType') === 'substructure') {
             this.route.params
-              .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles'], page, perPage))
+              .switchMap((params: Params) => this.rest.postCompoundBySubstructure(params['smiles'], this.includeParam, page, perPage))
               .subscribe(data => {
                   this.compounds = data['compounds'];
                   this.compoundDataSource = new CompoundsListDataSource(this.compounds);

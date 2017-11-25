@@ -15,7 +15,7 @@ export class ProductByNameComponent implements OnInit {
   displayedColumns: string[];
   productDataSource: ProductListDataSource;
   pageMeta: PageMeta | null;
-  includeParam = '?include[]=compound.*'
+  includeParam = '';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -41,7 +41,7 @@ export class ProductByNameComponent implements OnInit {
      if (params.has('keyword')) {
        let keyword = params.get('keyword');
        console.log(`retrieve compound by keyword: ${keyword}`);
-       this.rest.getProductsByName(this.includeParam, keyword, page, perPage)
+       this.rest.getProductsByName(keyword, this.includeParam, page, perPage)
          .subscribe(data => {
            this.products = data['products'];
            this.productDataSource = new ProductListDataSource(this.products);

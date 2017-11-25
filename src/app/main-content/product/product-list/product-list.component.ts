@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   productListDataSource: ProductListDataSource;
   pageMeta: PageMeta | null ;
   displayedColumns: string[];
-  includeParam = '?include[]=compound.*&';
+  includeParam = '';
 
   constructor(private router: Router,
               private route: ActivatedRoute,

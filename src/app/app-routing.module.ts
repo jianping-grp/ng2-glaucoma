@@ -9,6 +9,9 @@ import {ProductByNameComponent} from "./main-content/product/product-by-name/pro
 import {CompoundBySmilesComponent} from "./main-content/compound/compound-by-smiles/compound-by-smiles.component"
 import {UniprotAllPathwayComponent} from "./main-content/uniprot-all-pathways/uniprot-all-pathway.component";
 import {UniprotDbCompoundComponent} from "./main-content/uniprot-db-compound/uniprot-db-compound.component";
+import {TargetPredictionComponent} from "./main-content/tatget-prediction/target-prediction.component";
+import {UniprotByChemblIdComponent} from "./main-content/uniprot/uniprot-by-chembl-id/uniprot-by-chembl-id.component";
+import {UniprotByNameComponent} from "./main-content/uniprot/uniprot-by-name/uniprot-by-name.component";
 
 const routes: Routes = [
   // {
@@ -33,6 +36,9 @@ const routes: Routes = [
     path: 'product-by-name', component: ProductByNameComponent,
   },
   {
+    path: 'uniprot-by-name', component: UniprotByNameComponent,
+  },
+  {
     path: 'compound-by-smiles/:smiles', component: CompoundBySmilesComponent,
   },
   {
@@ -40,6 +46,12 @@ const routes: Routes = [
   },
   {
     path: 'uniprot-db-compound/:id', component: UniprotDbCompoundComponent,
+  },
+  {
+    path: 'target-prediction/:smiles', component: TargetPredictionComponent,
+  },
+  {
+    path: 'uniprot-by-chembl-id/:chemblId', component: UniprotByChemblIdComponent,
   }
 ];
 

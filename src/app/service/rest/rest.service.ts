@@ -24,33 +24,44 @@ export class RestService {
   private fetchDataList(url: string, includeParam='', page=0, perPage=this.PER_PAGE){
     page = +(page) + 1;
     this.globalService.setLoading(true);
-    return this.http.get(`${this.REST_HOST}/${url}${includeParam}?page=${page}&per_page=${perPage}`)
+    return this.http.get(`${this.REST_HOST}/${url}${includeParam}&page=${page}&per_page=${perPage}`)
       .finally(() => this.globalService.setLoading(false)); //stop loading when finished or an error occur
   }
 
-  private searchDataList(url: string, includeParam='', name: string, page=0, perPage=this.PER_PAGE) {
-    page = +(page) + 1;
-    this.globalService.setLoading(true);
-    return this.http.get(`${this.REST_HOST}/${url}/${includeParam}&?{${name}.icontains}=Act&page=${page}&per_page=${perPage}`)
-      .finally(() => this.globalService.setLoading(false));
-  }
+  // private searchDataList(url: string, includeParam='', name: string, page=0, perPage=this.PER_PAGE) {
+  //   page = +(page) + 1;
+  //   this.globalService.setLoading(true);
+  //   return this.http.get(`${this.REST_HOST}/${url}/${includeParam}&?{${name}.icontains}=Act&page=${page}&per_page=${perPage}`)
+  //     .finally(() => this.globalService.setLoading(false));
+  // }
 
+  //search Structure by simialiarity
   postCompoundByStructure(smiles: string, similarity: number,includeParam='', page=0, perPage=this.PER_PAGE): Observable<any>{
     page= +(page) +1;
     const body= {smiles: smiles, similarity: similarity, substructure_search: 0};
     this.globalService.setLoading(true);
     console.log(body);
-    return this.http.post(`${this.REST_HOST}/compounds/search/${includeParam}?page=${page}&per_page=${perPage}`, body)
+    return this.http.post(`${this.REST_HOST}/compounds/search/${includeParam}&page=${page}&per_page=${perPage}`, body)
       .finally(() => this.globalService.setLoading(false))
       .catch(this.handleError)
   }
 
-  postCompoundBySubstructure(smiles:string, page=0, perPage=this.PER_PAGE): Observable<any> {
+  // search Substructure
+  postCompoundBySubstructure(smiles:string,includeParam='', page=0, perPage=this.PER_PAGE): Observable<any> {
     page = +(page) + 1;
     const body={smiles: smiles, similarity: 0, substructure_search: 1};
     this.globalService.setLoading(true);
     console.log(body)
-    return this.http.post(`${this.REST_HOST}/compounds/search/?page=${page}&per_page=${perPage}`, body)
+    return this.http.post(`${this.REST_HOST}/compounds/search/${includeParam}&page=${page}&per_page=${perPage}`, body)
+      .finally(() => this.globalService.setLoading(false))
+      .catch(this.handleError);
+  }
+
+  //target prediction
+  postTargetPrediction(smiles: string, includeParam=''): Observable<any> {
+    const body = {smiles: 'CC1CCCN(C1C)C(=O)c2csc(Nc3ccc(C)cc3)n2'};
+    this.globalService.setLoading(true);
+    return this.http.post(`${this.REST_HOST}/target-prediction/?${includeParam}`, body)
       .finally(() => this.globalService.setLoading(false))
       .catch(this.handleError);
   }
@@ -66,31 +77,49 @@ export class RestService {
   }
 
   getProductList(includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`products/`, includeParam, page, perPage)
+    return this.fetchDataList(`products/?include[]=compound.*`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
   //get uniprot  by compounds id
   getUniprotByCid(id: any, includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`uniprot-info/?filter{compounds.id}=${id}&`, includeParam, page, perPage)
+    return this.fetchDataList(`uniprot-info/?filter{compounds.id}=${id}`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
   //get compounds by uniprot id
   getCompoundsByUid(id: any, includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`compounds/?filter{uniprotinfo_set.id}=${id}&`, includeParam, page, perPage)
+    return this.fetchDataList(`compounds/?filter{uniprotinfo_set.id}=${id}`, includeParam, page, perPage)
+      .catch(this.handleError)
+  }
+
+  //get uniprot by uniprot_chembl_id
+  getUniprotByChemblId(chemblId: any, includeParam, page?, perPage?): Observable<any> {
+    return this.fetchDataList(`uniprot-info/?filter{uniprot_chembl_id}=${chemblId}`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
   //get uniprot-db-compound by uniprot id
   getUniprotDbCompoundByUid(id: any, includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`uniprot-compound/?filter{uniprot_name.id}=${id}&`, includeParam, page, perPage)
+    return this.fetchDataList(`uniprot-compound/?filter{uniprot_name.id}=${id}`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
   //get uniprot-all-pathways by uniprot id
   getUniprotAllPathwaysByUid(id: any, includeParam, page?, perPage?): Observable<any> {
-    return this.fetchDataList(`uniprot-pathway/?filter{uniprot_name.id}=${id}&`, includeParam, page, perPage)
+    return this.fetchDataList(`uniprot-pathway/?filter{uniprot_name.id}=${id}`, includeParam, page, perPage)
+      .catch(this.handleError)
+  }
+
+  //get Products by product name
+  getProductsByName(name: string, includeParam, page?, perPage?): Observable<any> {
+    return this.fetchDataList(`products/?filter{name.icontains}=${name}&include[]=compound.*`, includeParam, page, perPage)
+      .catch(this.handleError)
+  }
+
+  //get Uniprot by name
+  getUniprotByName(name: string, includeParam, page?, perPage?): Observable<any> {
+    return this.fetchDataList(`uniprot-info/?filter{uniprot_type.icontains}=${name}`, includeParam, page, perPage)
       .catch(this.handleError)
   }
 
@@ -115,14 +144,6 @@ export class RestService {
   //   return this.fetchData(`compounds/${id}`, includeParams)
   //     .catch(this.handleError)
   // }
-
-
-//get Products by product name
-  getProductsByName(includeParam, name, page?, perPage?): Observable<any> {
-    return this.searchDataList('products',includeParam, name, page, perPage)
-      .catch(this.handleError)
-  }
-
 
 
   private handleError(error: HttpErrorResponse | any ) {

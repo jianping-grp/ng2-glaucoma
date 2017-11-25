@@ -44,4 +44,8 @@ export class StructureSearchComponent implements OnInit {
       similarityValue: similarityValue}})
   }
 
+  goTargetPredictionBySmiles(smiles: string) {
+    this.router.navigate(['/target-prediction', smiles])
+  }
+
 }

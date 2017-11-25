@@ -16,7 +16,7 @@ export class CompoundListComponent implements OnInit {
   compoundListDataSource: CompoundsListDataSource;
   pageMeta: PageMeta | null;
   displayedColumns: string[];
-  includeParam ='';
+  includeParam ='?exclude[]=uniprotinfo_set.*&include[]=uniprotinfo_set.id'; //use for count uniprot;
 
   constructor(private rest: RestService,
               private router: Router,

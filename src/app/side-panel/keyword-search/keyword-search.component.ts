@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
 export class KeywordSearchComponent implements OnInit {
   keyword: string;
   searchTypeList = [
-    {value: 'product', viewValue: 'Drug', placeholder: 'Drug Name'}
+    {value: 'product', viewValue: 'Drug', placeholder: 'Drug Name'},
+    {value: 'uniprot', viewValue: 'Target', placeholder: 'Target Name'}
   ];
   selectedType = this.searchTypeList[0].value;
   constructor(private router: Router) {
@@ -22,8 +23,11 @@ export class KeywordSearchComponent implements OnInit {
   }
 
   submit() {
-    if(this.selectedType === 'product') {
-      this.router.navigate(['product-by-name'],{queryParams: {keyword: this.keyword}})
+    if(this.selectedType === 'target') {
+      this.router.navigate(['uniprot-by-name'],{queryParams: {keyword: this.keyword}})
+    }
+    else  {
+      this.router.navigate(['product-by-name'], {queryParams: {keyword: this.keyword}})
     }
   }
  ngOnInit() {}

@@ -111,7 +111,7 @@
   <ng-container matColumnDef="uniprotinfo_set">
     <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <button mat-button color="primary" (click)="goUniprotByCid(row.id)">view</button>
+      <button mat-button color="primary" (click)="goUniprotByCid(row.id)">{{row.uniprotinfo_set.length}}</button>
     </mat-cell>
   </ng-container>
 

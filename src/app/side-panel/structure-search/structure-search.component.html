@@ -24,9 +24,12 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <button mat-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Submit</button>
+  <button mat-raised-button  type="submit" color="primary" [disabled]="structureSearchForm.invalid">Fetch Compounds</button>
 
 </form>
 
-
+<!--todo modify styles-->
+<hr/>
+<p>Prediction of molecular similarity target</p>
+<button mat-raised-button type="submit" color="primary" (click)="goTargetPredictionBySmiles(applet.smiles)">Target Prediction</button>
 

@@ -21,7 +21,7 @@ export class CompoundByUidComponent implements OnInit {
   compounds: Compound[];
   uniprotDbCompounds: UniprotDbCompound[];
   compoundByUidDataSource: CompoundsListDataSource;
-  includeParam = '';
+  includeParam = '&exclude[]=uniprotinfo_set.*&include[]=uniprotinfo_set.id'; //use for count uniport
   displayedColumns: string[];
   pageMeta:PageMeta | null;
 
@@ -63,7 +63,7 @@ export class CompoundByUidComponent implements OnInit {
             ()=> {},
             );
         // fetch uniprot detail
-       this.rest.getUniprotDetail(id, this.includeParam)
+       this.rest.getUniprotDetail(id, '')
          .subscribe(
            data => {
              this.uniprot= data['uniprot_info']
