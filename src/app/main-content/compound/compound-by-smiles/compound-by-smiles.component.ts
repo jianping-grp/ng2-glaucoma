@@ -25,7 +25,7 @@ export class CompoundBySmilesComponent implements OnInit {
               ){
     this.displayedColumns = [
       'generic_name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
-      'rtb', 'psa',  'uniprotinfo_set'
+      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
 
