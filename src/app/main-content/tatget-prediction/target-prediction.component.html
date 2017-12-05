@@ -3,30 +3,30 @@
 </div>
 
 <div *ngIf="!loadingStatus">
-<div *ngIf="isEmpty">
-  <h5 class="text-position">null</h5>
-</div>
+  <div *ngIf="isEmpty">
+    <h5 class="text-position">null</h5>
+  </div>
 
-<div *ngIf="!isEmpty">
-  <h5>Prediction of molecular similarity target:</h5>
-  <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-   <tr>
-     <th>Target Name</th>
-     <th>topological-hashed</th>
-     <th>atompair-hashed</th>
-     <th>maccs</th>
-     <th>morgan-hashed</th>
-   </tr>
-   <tr  *ngFor="let targetPrediction of targetPreditions">
-     <td>
-       <button mat-button color="primary" (click)="goUniprotByChemblId(targets[0])">{{targets[0]}}</button>
-     </td>
-     <td>{{targetPrediction['topological-hashed']['p-value']}}</td>
-     <td>{{targetPrediction['atompair-hashed']['p-value']}}</td>
-     <td>{{targetPrediction?.maccs['p-value']}}</td>  <!-- ?.maccs  console does not report an error-->
-     <td>{{targetPrediction['morgan-hashed']['p-value']}}</td>
-   </tr>
-  </table>
-</div>
+  <div *ngIf="!isEmpty">
+    <h5>Prediction of molecular similarity target:</h5>
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <tr>
+        <th>Target Name</th>
+        <th>topological-hashed</th>
+        <th>atompair-hashed</th>
+        <th>maccs</th>
+        <th>morgan-hashed</th>
+      </tr>
+      <tr *ngFor="let target of targetPkls">
+        <td>
+          <button mat-button color="primary" (click)="goUniprotByChemblId(targets[0])">{{target?.chembl_id}}</button>
+        </td>
+        <td>{{target?.topological_hashed}}</td>
+        <td>{{target?.atompair_hashed}}</td>
+        <td>{{target?.maccs}}</td>
+        <td>{{target?.morgan_hashed}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
 

@@ -28,7 +28,7 @@ export class UniprotByCidComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
-      'kegg_name',  'uniprot_descriptor','uniprot_all_pathway', 'compounds'];
+      'kegg_name',  'uniprot_descriptor','uniprot_all_pathway', 'uniprot_db_compound', 'compounds'];
   }
 
   ngOnInit() {
@@ -46,6 +46,10 @@ export class UniprotByCidComponent implements OnInit {
 
   goUniprotAllPathwayByUid(id: any) {
     this.router.navigate(['/uniprot-all-pathway', id])
+  }
+
+  goUniprotDbCompoundByUid(id: any) {
+    this.router.navigate(['/uniprot-db-compound', id])
   }
 
   private _getData(page?, perPage?):void {

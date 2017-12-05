@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {RestService} from "../../service/rest/rest.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {TargetPrediction} from "../../models/target-prediction/target-prediction";
+import {TargetPkl} from "../../models/target-pkl";
 import {GlobalService} from "../../service/global/global.service";
 
 @Component({
@@ -10,8 +10,7 @@ import {GlobalService} from "../../service/global/global.service";
 })
 
 export class TargetPredictionComponent implements OnInit {
-  targets=[];
-  targetPreditions=[];
+  targetPkls:TargetPkl[];
   includeParam = '';
   loadingStatus: boolean;
   isEmpty= false;
@@ -40,16 +39,10 @@ export class TargetPredictionComponent implements OnInit {
         .subscribe(data => {
           console.log('total data:',data)
           //data include one or more targets
-         for (let target in data) {
-           console.log('data:',data);
-           this.targets.push(target);
-           console.log('init:',data[target]);
-           console.log('test:',typeof data[target]['atompair-hashed']['p-value']);
-           this.targetPreditions.push(data[target]);
-         }
+        this.targetPkls = data;
 
          //if targets is non-data, no display;
-          if (this.targets.length === 0) {
+          if (this.targetPkls.length === 0) {
             this.isEmpty = true;
           }
         },

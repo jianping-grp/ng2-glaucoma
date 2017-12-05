@@ -17,7 +17,7 @@ export class CompoundBySmilesComponent implements OnInit {
   displayedColumns: string[];
   pageMeta: PageMeta | null;
   includeParam='?exclude[]=uniprotinfo_set.*&include[]=uniprotinfo_set.id'; //use for count uniprot
-  // similarity='';
+  isEmpty = false;
 
   constructor(private rest: RestService,
               private route: ActivatedRoute,
@@ -25,7 +25,7 @@ export class CompoundBySmilesComponent implements OnInit {
               ){
     this.displayedColumns = [
       'generic_name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
-      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
+      'rtb', 'psa',  'uniprotinfo_set'
     ]
   }
 

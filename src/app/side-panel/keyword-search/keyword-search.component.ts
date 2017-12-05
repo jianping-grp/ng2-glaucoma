@@ -23,7 +23,7 @@ export class KeywordSearchComponent implements OnInit {
   }
 
   submit() {
-    if(this.selectedType === 'target') {
+    if(this.selectedType === 'uniprot') {
       this.router.navigate(['uniprot-by-name'],{queryParams: {keyword: this.keyword}})
     }
     else  {

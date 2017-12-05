@@ -1,14 +1,14 @@
-<div *ngIf="!loading">
-<h6>All Compound Related to proteins:</h6>
-<mat-grid-list cols="8" rowHeight="50px">
-  <mat-grid-tile *ngFor="let compound of uniprotDbCompounds">
-    <a [href]="compound.url">
-      <button mat-button color="primary">{{compound.compound_name}}</button>
-    </a>
-  </mat-grid-tile>
-</mat-grid-list>
+<div *ngIf="!isEmpty">
+  <h6>All Compound Related to proteins:</h6>
+  <mat-grid-list cols="8" rowHeight="50px">
+    <mat-grid-tile *ngFor="let compound of uniprotDbCompounds">
+      <a [href]="compound.url">
+        <button mat-button color="primary">{{compound.compound_name}}</button>
+      </a>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
 
-<div *ngIf="loading" >
+<div *ngIf="isEmpty">
   <h5 class="text-position">null</h5>
 </div>

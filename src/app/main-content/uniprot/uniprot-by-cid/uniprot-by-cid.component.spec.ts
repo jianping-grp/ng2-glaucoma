@@ -1,19 +1,19 @@
 import {async, ComponentFixture, TestBed} from "@angular/core/testing";
-import {UniprotDetailComponent} from "./uniprot-by-cid.component"
+import {UniprotByCidComponent} from "./uniprot-by-cid.component"
 
-describe('UniprotDetailComponent', () => {
-  let component: UniprotDetailComponent;
-  let fixture: ComponentFixture<UniprotDetailComponent>;
+describe('UniprotByCidComponent', () => {
+  let component: UniprotByCidComponent;
+  let fixture: ComponentFixture<UniprotByCidComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [UniprotDetailComponent]
+      declarations: [UniprotByCidComponent]
     })
       .compileComponents()
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UniprotDetailComponent);
+    fixture = TestBed.createComponent(UniprotByCidComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

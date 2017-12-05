@@ -13,7 +13,7 @@ export class UniprotDbCompoundComponent implements OnInit {
   uniprotDbCompounds: UniprotDbCompound[];
   includeParam = '';
   pageMeta: PageMeta | null;
-  loading=false;
+  isEmpty=false;
 
   constructor(private rest: RestService,
               private route: ActivatedRoute) {
@@ -28,14 +28,14 @@ export class UniprotDbCompoundComponent implements OnInit {
   private _getUniprotDbCompound(page?, perPage?):void {
     this.route.paramMap
       .subscribe((params: ParamMap) => {
-      this.rest.getUniprotDbCompoundByUid(params.get('id'), this.includeParam, 1, 99999)
+      this.rest.getUniprotDbCompoundByUid(params.get('id'), this.includeParam, 0, 99999)
         .subscribe(data => {
           this.uniprotDbCompounds = data['uniprot_db_compounds'];
           this.pageMeta = data['meta'];
 
           //if uniprotDbCompounds is null, no display
           if (this.uniprotDbCompounds.length === 0) {
-            this.loading = true;
+            this.isEmpty = true;
           }
         },
           error => {},

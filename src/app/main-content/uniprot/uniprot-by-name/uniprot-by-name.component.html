@@ -33,9 +33,11 @@
   </ng-container>
 
   <ng-container matColumnDef="kegg_name">
-    <mat-header-cell *matHeaderCellDef>KEGG Pathway</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>KEGG</mat-header-cell>
     <mat-cell *matCellDef="let row">
-      <a [href]="row.kegg_url"><button mat-button color="primary">{{row.kegg_name}}</button></a>
+      <a [href]="row.kegg_url">
+        <button mat-button color="primary">{{row.kegg_name}}</button>
+      </a>
     </mat-cell>
   </ng-container>
 

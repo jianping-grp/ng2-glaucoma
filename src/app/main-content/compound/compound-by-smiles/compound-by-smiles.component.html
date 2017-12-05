@@ -9,7 +9,9 @@
                 [molString]="row.smiles"
       >
       </app-jsme>
-      <a [href]="row.chembl_link"><button mat-button color="primary">{{row.generic_name}}</button></a>
+      <a [href]="row.chembl_link">
+        <button mat-button color="primary">{{row.generic_name}}</button>
+      </a>
     </mat-cell>
   </ng-container>
 
@@ -74,10 +76,9 @@
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
 </mat-table>
 <mat-paginator [length]="pageMeta?.total_results"
-              [pageSize]="pageMeta?.per_page"
-              (page)="pageChange($event)"
+               [pageSize]="pageMeta?.per_page"
+               (page)="pageChange($event)"
 >
 </mat-paginator>
-
 
 

@@ -13,7 +13,7 @@ export class UniprotAllPathwayComponent implements OnInit {
   uniprotAllPathways: UniprotAllPathway[];
   includeParam = '';
   pageMeta : PageMeta | null;
-  loading = false;
+  isEmpty = false;
 
   constructor(private rest: RestService,
               private route: ActivatedRoute,
@@ -27,14 +27,15 @@ export class UniprotAllPathwayComponent implements OnInit {
   private _getUniprotAllPathway(page?, perPage?): void {
     this.route.paramMap
       .subscribe((params: ParamMap) => {
-      this.rest.getUniprotAllPathwaysByUid(params.get('id'), this.includeParam, 1, 999999)
+      this.rest.getUniprotAllPathwaysByUid(params.get('id'), this.includeParam, 0, 999999)
         .subscribe( data => {
+          console.log('id:', params.get('id'));
           this.uniprotAllPathways = data['uniprot_all_pathways'];
           this.pageMeta = data['meta'];
 
           //if uniprotAllPathways is null, no display
           if (this.uniprotAllPathways.length === 0) {
-            this.loading = true;
+            this.isEmpty = true;
           }
         },
           error => {},
