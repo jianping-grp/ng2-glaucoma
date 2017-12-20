@@ -3,12 +3,11 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <tr>
     <th>ChEMBL ID</th>
-    <th>Entry</th>
+    <th>Uniprot</th>
     <th>Entry Name</th>
-    <th>Target Type</th>
+    <th>Target Name</th>
     <th>KEGG</th>
-    <th>All Pathway</th>
-    <th>All Compound Related to proteins</th>
+    <th>Pathway</th>
   </tr>
   <tr>
     <td>
@@ -33,17 +32,13 @@
         view
       </button>
     </td>
-    <td>
-      <button mat-button color="primary" (click)="goUniprotDbCompoundByUid(uniprot.id)">view</button>
-    </td>
-
   </tr>
 </table>
 
 <br>
 <br>
 
-<h5>Compounds Infomation:</h5>
+<h5>Compounds Targeting Glaucoma Related Protein:</h5>
 <mat-table #compoundByUidTable [dataSource]="compoundByUidDataSource">
   <ng-container matColumnDef="generic_name">
     <mat-header-cell *matHeaderCellDef>Compound</mat-header-cell>
@@ -69,11 +64,6 @@
   <ng-container matColumnDef="mol_weight">
     <mat-header-cell *matHeaderCellDef>Mol Weight</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.mol_weight}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="cas">
-    <mat-header-cell *matHeaderCellDef>Cas</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.cas}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="alogp">
@@ -111,12 +101,12 @@
     <mat-cell *matCellDef="let row">{{row.drugbank_id}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="uniprotinfo_set">
-    <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <button mat-button color="primary" (click)="goUniprotByCid(row.id)">{{row.uniprotinfo_set.length}}</button>
-    </mat-cell>
-  </ng-container>
+  <!--<ng-container matColumnDef="uniprotinfo_set">-->
+    <!--<mat-header-cell *matHeaderCellDef>Target</mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let row">-->
+      <!--<button mat-button color="primary" (click)="goUniprotByCid(row.id)">{{row.uniprotinfo_set.length}}</button>-->
+    <!--</mat-cell>-->
+  <!--</ng-container>-->
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
@@ -128,97 +118,3 @@
 >
 </mat-paginator>
 
-<!--Material Table-->
-<!--<table class="matl-data-table matl-shadow&#45;&#45;2dp">-->
-<!--<tr>-->
-<!--<th>ChEMBL ID: </th>-->
-<!--<td align="left">-->
-<!--<a href="https://www.ebi.ac.uk/chembl/target/inspect/{{uniprot?.uniprot_chembl_id}}">-->
-<!--<button mat-button color="primary">{{uniprot?.uniprot_chembl_id}}</button>-->
-<!--</a>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr aria-rowspan="2">-->
-<!--<th>Entry: </th>-->
-<!--<td>-->
-<!--<a href="http://www.uniprot.org/uniprot/{{uniprot?.entry}}">-->
-<!--<button mat-button color="primary">{{uniprot?.entry}}</button>-->
-<!--</a>-->
-<!--<p>{{uniprot?.entryname}}</p>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>EntryName: </th>-->
-<!--<td>{{uniprot?.entryname}}</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>Target Type: </th>-->
-<!--<td>{{uniprot?.uniprot_type}}</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>KEGG Pathway: </th>-->
-<!--<td>-->
-<!--<a [href]="uniprot?.kegg_url"><button mat-button color="primary">{{uniprot?.kegg_name}}</button></a>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>All Compounds: </th>-->
-<!--<td *ngFor="let compound of uniprotDbCompounds">-->
-<!--<button mat-button color="primary" *ngFor="let compound of uniprotDbCompounds">-->
-<!--<a [href]="compound.url">{{compound.compound_name}}</a>-->
-<!--</button>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>Target Description: </th>-->
-<!--<td>{{uniprot?.uniprot_descriptor}}</td>-->
-<!--</tr>-->
-<!--</table>-->
-
-
-<!--bootstrap  uniprot infomation table-->
-<!--<table class="table-bordered table-responsive table-hover">-->
-<!--<tr>-->
-<!--<th>ChEMBL ID: </th>-->
-<!--<td>-->
-<!--<a href="https://www.ebi.ac.uk/chembl/target/inspect/{{uniprot?.uniprot_chembl_id}}">-->
-<!--<button mat-button color="primary">{{uniprot?.uniprot_chembl_id}}</button>-->
-<!--</a>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>Entry: </th>-->
-<!--<td>-->
-<!--<a href="http://www.uniprot.org/uniprot/{{uniprot?.entry}}">-->
-<!--<button mat-button color="primary">{{uniprot?.entry}}</button>-->
-<!--</a>-->
-<!--</td>-->
-<!--</tr>-->
-
-<!--<tr>-->
-<!--<th>EntryName: </th>-->
-<!--<td>{{uniprot?.entryname}}</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>Target Type: </th>-->
-<!--<td>{{uniprot?.uniprot_type}}</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>KEGG Pathway: </th>-->
-<!--<td>-->
-<!--<a [href]="uniprot?.kegg_url"><button mat-button color="primary">{{uniprot?.kegg_name}}</button></a>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>All Compounds: </th>-->
-<!--<td>-->
-<!--<button *ngFor="let compound of uniprotDbCompounds">-->
-<!--<a [href]="compound.url">{{compound.compound_name}}</a>-->
-<!--</button>-->
-<!--</td>-->
-<!--</tr>-->
-<!--<tr>-->
-<!--<th>Target Description: </th>-->
-<!--<td><textarea>{{uniprot?.uniprot_descriptor}}</textarea></td>-->
-<!--</tr>-->
-<!--</table>-->

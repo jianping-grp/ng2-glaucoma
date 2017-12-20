@@ -5,7 +5,6 @@
     <th>Compound</th>
     <th>Formula</th>
     <th>Mol Weight</th>
-    <th>Cas</th>
     <th>AlogP</th>
     <th>HBA</th>
     <th>HBD</th>
@@ -27,7 +26,6 @@
     </td>
     <td>{{compound?.formula}}</td>
     <td>{{compound?.mol_weight}}</td>
-    <td>{{compound?.cas}}</td>
     <td>{{compound?.alogp}}</td>
     <td>{{compound?.hba}}</td>
     <td>{{compound?.hbd}}</td>
@@ -40,7 +38,7 @@
 <br>
 <br>
 
-<h5>Target Infomation:</h5>
+<h5>Proteins Related to Glaucoma:</h5>
 <mat-table #uniprotByCidTable [dataSource]="uniprotByCidDataSource">
   <ng-container matColumnDef="uniprot_chembl_id">
     <mat-header-cell *matHeaderCellDef>ChEMBL ID</mat-header-cell>
@@ -52,7 +50,7 @@
   </ng-container>
 
   <ng-container matColumnDef="entry">
-    <mat-header-cell *matHeaderCellDef>Entry</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Uniprot</mat-header-cell>
     <mat-cell *matCellDef="let row">
       <a href="http://www.uniprot.org/uniprot/{{row.entry}}">
         <button mat-button color="primary">{{row.entry}}</button>
@@ -61,18 +59,13 @@
   </ng-container>
 
   <ng-container matColumnDef="entryname">
-    <mat-header-cell *matHeaderCellDef>Entryname</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Entry Name</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.entryname}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="uniprot_type">
-    <mat-header-cell *matHeaderCellDef>Target Type</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Target Name</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.uniprot_type}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="uniprot_descriptor">
-    <mat-header-cell *matHeaderCellDef>Target Description</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.uniprot_descriptor}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="kegg_name">
@@ -83,25 +76,25 @@
   </ng-container>
 
   <ng-container matColumnDef="uniprot_all_pathway">
-    <mat-header-cell *matHeaderCellDef>All Pathway</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Pathway</mat-header-cell>
     <mat-cell *matCellDef="let row">
       <button mat-button color="primary" (click)="goUniprotAllPathwayByUid(row.id)">view</button>
     </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="uniprot_db_compound">
-    <mat-header-cell *matHeaderCellDef>All Compound Related to proteins</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <button mat-button color="primary" (click)="goUniprotDbCompoundByUid(row.id)">view</button>
-    </mat-cell>
-  </ng-container>
+  <!--<ng-container matColumnDef="uniprot_db_compound">-->
+    <!--<mat-header-cell *matHeaderCellDef>All Compound Related to proteins</mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let row">-->
+      <!--<button mat-button color="primary" (click)="goUniprotDbCompoundByUid(row.id)">view</button>-->
+    <!--</mat-cell>-->
+  <!--</ng-container>-->
 
-  <ng-container matColumnDef="compounds">
-    <mat-header-cell *matHeaderCellDef>Compounds</mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <button mat-button color="primary" (click)="goCompoundByUid(row.id)">{{row.compounds.length}}</button>
-    </mat-cell>
-  </ng-container>
+  <!--<ng-container matColumnDef="compounds">-->
+    <!--<mat-header-cell *matHeaderCellDef>Compounds</mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let row">-->
+      <!--<button mat-button color="primary" (click)="goCompoundByUid(row.id)">{{row.compounds.length}}</button>-->
+    <!--</mat-cell>-->
+  <!--</ng-container>-->
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

@@ -22,8 +22,8 @@ export class CompoundListComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute){
     this.displayedColumns = [
-       'generic_name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
-      'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
+       'generic_name', 'formula', 'mol_weight',  'alogp', 'hba', 'hbd',
+      'rtb', 'psa', 'uniprotinfo_set'
     ]
   }
 

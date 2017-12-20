@@ -22,7 +22,7 @@ export class UniprotByNameComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
-      'kegg_name',  'uniprot_descriptor', 'uniprot_all_pathway', 'uniprot_db_compound','compounds']
+      'kegg_name',  'uniprot_all_pathway', 'compounds']
   }
 
 

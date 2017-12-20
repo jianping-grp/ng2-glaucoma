@@ -19,7 +19,7 @@
       </tr>
       <tr *ngFor="let target of targetPkls">
         <td>
-          <button mat-button color="primary" (click)="goUniprotByChemblId(targets[0])">{{target?.chembl_id}}</button>
+          <button mat-button color="primary" (click)="goUniprotByChemblId(target.chembl_id)">{{target?.chembl_id}}</button>
         </td>
         <td>{{target?.topological_hashed}}</td>
         <td>{{target?.atompair_hashed}}</td>

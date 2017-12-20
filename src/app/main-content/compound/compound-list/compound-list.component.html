@@ -1,3 +1,4 @@
+<h5>Compounds Targeting Glaucoma Related Proteins:</h5>
 <mat-table #compoundListTable [dataSource]="compoundListDataSource">
   <ng-container matColumnDef="generic_name">
     <mat-header-cell *matHeaderCellDef>Compound</mat-header-cell>
@@ -21,11 +22,6 @@
   <ng-container matColumnDef="mol_weight">
     <mat-header-cell *matHeaderCellDef>Mol Weight</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.mol_weight}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="cas">
-    <mat-header-cell *matHeaderCellDef>Cas</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.cas}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="alogp">
@@ -53,15 +49,15 @@
     <mat-cell *matCellDef="let row">{{row.psa}}</mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="drug_status">
-    <mat-header-cell *matHeaderCellDef>Drug Status</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.drug_status}}</mat-cell>
-  </ng-container>
+  <!--<ng-container matColumnDef="drug_status">-->
+    <!--<mat-header-cell *matHeaderCellDef>Drug Status</mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let row">{{row.drug_status}}</mat-cell>-->
+  <!--</ng-container>-->
 
-  <ng-container matColumnDef="drugbank_id">
-    <mat-header-cell *matHeaderCellDef>DrugBank ID</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.drugbank_id}}</mat-cell>
-  </ng-container>
+  <!--<ng-container matColumnDef="drugbank_id">-->
+    <!--<mat-header-cell *matHeaderCellDef>DrugBank ID</mat-header-cell>-->
+    <!--<mat-cell *matCellDef="let row">{{row.drugbank_id}}</mat-cell>-->
+  <!--</ng-container>-->
 
   <ng-container matColumnDef="uniprotinfo_set">
     <mat-header-cell *matHeaderCellDef>Target</mat-header-cell>

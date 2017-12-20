@@ -20,7 +20,7 @@ export class UniprotByChemblIdComponent implements OnInit {
   constructor(private rest: RestService,
               private route: ActivatedRoute,
               private router: Router)  { this.displayedColumns = ['uniprot_chembl_id',  'entry', 'entryname', 'uniprot_type',
-    'kegg_name',  'uniprot_descriptor','uniprot_all_pathway', 'compounds'];
+    'kegg_name', 'uniprot_all_pathway', 'compounds'];
 }
 
   ngOnInit() {

@@ -10,7 +10,7 @@
   </ng-container>
 
   <ng-container matColumnDef="entry">
-    <mat-header-cell *matHeaderCellDef>Entry</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Uniprot</mat-header-cell>
     <mat-cell *matCellDef="let row">
       <a href="http://www.uniprot.org/uniprot/{{row.entry}}">
         <button mat-button color="primary">{{row.entry}}</button>
@@ -19,18 +19,13 @@
   </ng-container>
 
   <ng-container matColumnDef="entryname">
-    <mat-header-cell *matHeaderCellDef>Entryname</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Entry Name</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.entryname}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="uniprot_type">
-    <mat-header-cell *matHeaderCellDef>Target Type</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Target Name</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.uniprot_type}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="uniprot_descriptor">
-    <mat-header-cell *matHeaderCellDef>Target Description</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.uniprot_descriptor}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="kegg_name">
@@ -41,7 +36,7 @@
   </ng-container>
 
   <ng-container matColumnDef="uniprot_all_pathway">
-    <mat-header-cell *matHeaderCellDef>All Pathway</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Pathway</mat-header-cell>
     <mat-cell *matCellDef="let row">
       <button mat-button color="primary" (click)="goUniprotAllPathwayByUid(row.id)">view</button>
     </mat-cell>

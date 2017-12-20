@@ -1,3 +1,4 @@
+<h5>Drug Search Results:</h5>
 <mat-table #compoundByNameTable [dataSource]="productDataSource">
   <ng-container matColumnDef="generic_name">
     <mat-header-cell *matHeaderCellDef>Compound</mat-header-cell>
@@ -26,11 +27,6 @@
   <ng-container matColumnDef="mol_weight">
     <mat-header-cell *matHeaderCellDef>Mol Weight</mat-header-cell>
     <mat-cell *matCellDef="let row">{{row.compound.mol_weight}}</mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="cas">
-    <mat-header-cell *matHeaderCellDef>Cas</mat-header-cell>
-    <mat-cell *matCellDef="let row">{{row.compound.cas}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="alogp">

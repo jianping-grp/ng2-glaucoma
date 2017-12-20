@@ -21,7 +21,7 @@ export class ProductByNameComponent implements OnInit {
               private router: Router,
               private rest: RestService) {
     this.displayedColumns = [
-      'generic_name', 'name', 'formula', 'mol_weight', 'cas', 'alogp', 'hba', 'hbd',
+      'generic_name', 'name', 'formula', 'mol_weight', 'alogp', 'hba', 'hbd',
       'rtb', 'psa', 'drug_status', 'drugbank_id', 'uniprotinfo_set'
     ]
   }
